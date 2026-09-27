@@ -1,16 +1,15 @@
 {
   "name": "kahve-kedisi",
-  "displayName": "Kahve Kedisi",
-  "description": "Sevimli, mola hatirlatan ve calisma aliskanliklarini takip eden animasyonlu VS Code kedisi",
-  "version": "1.0.0",
-  "publisher": "kahve-kedisi",
+  "displayName": "Coffee Cat (Kahve Kedisi)",
+  "description": "An interactive, animated cat companion that tracks your focus sessions, reminds you to take healthy breaks, and brings joy to your coding routine in VS Code.",
+  "version": "1.0.2",
+  "publisher": "CoffeeCatStudio",
   "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Other",
-    "Productivity"
+    "Other"
   ],
   "keywords": [
     "coffee",
@@ -19,6 +18,7 @@
     "timer",
     "pomodoro",
     "health",
+    "productivity",
     "mola",
     "kedi"
   ],
@@ -30,38 +30,38 @@
     "commands": [
       {
         "command": "kahveKedisi.molaGoster",
-        "title": "Mola Zamanı Panelini Aç",
-        "category": "Kahve Kedisi",
+        "title": "Open Break Reminder Panel",
+        "category": "Coffee Cat",
         "icon": "$(heart)"
       },
       {
         "command": "kahveKedisi.istatistikGoster",
-        "title": "Mola Karnesi ve İstatistikler",
-        "category": "Kahve Kedisi",
+        "title": "Break Report & Statistics",
+        "category": "Coffee Cat",
         "icon": "$(graph)"
       },
       {
         "command": "kahveKedisi.molaBaslat",
-        "title": "Şimdi Mola Ver",
-        "category": "Kahve Kedisi",
+        "title": "Take a Break Now",
+        "category": "Coffee Cat",
         "icon": "$(coffee)"
       },
       {
         "command": "kahveKedisi.sayaciSifirla",
-        "title": "Çalışma Sayacını Sıfırla",
-        "category": "Kahve Kedisi",
+        "title": "Reset Timer",
+        "category": "Coffee Cat",
         "icon": "$(sync)"
       },
       {
         "command": "kahveKedisi.simdilikKapat",
-        "title": "Kediyi Uyut / Duraklat",
-        "category": "Kahve Kedisi",
+        "title": "Sleep / Pause Cat",
+        "category": "Coffee Cat",
         "icon": "$(debug-pause)"
       },
       {
         "command": "kahveKedisi.kediyiSev",
-        "title": "Kediyi Sev",
-        "category": "Kahve Kedisi",
+        "title": "Pet the Cat",
+        "category": "Coffee Cat",
         "icon": "$(sparkle)"
       }
     ],

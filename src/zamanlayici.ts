@@ -3,6 +3,7 @@ import { DurumCubuguYoneticisi } from './durumCubugu';
 import { IstatistikYoneticisi } from './istatistik';
 import { KediModu, MesajYoneticisi } from './mesajlar';
 import { PanelYoneticisi } from './panel';
+import { I18nManager } from './i18n';
 
 export class ZamanlayiciYoneticisi implements vscode.Disposable {
   private timer: ReturnType<typeof setInterval> | null = null;
@@ -74,6 +75,8 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   }
 
   private saniyeTik(): void {
+    const i18n = I18nManager.getStrings();
+
     if (this.isPaused) {
       this.durumCubugu.guncelle(
         this.calismaSaniyesi,
@@ -104,7 +107,7 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
         this.calismaSaniyesi = 0;
         this.kesintisizSaniye = 0;
         this.ertelemeSayisi = 0;
-        vscode.window.showInformationMessage('Molanız tamamlandı! Harika bir enerjiyle kodlamaya hazır mısınız?');
+        vscode.window.showInformationMessage(i18n.msgBreakFinished);
         this.durumGuncelle();
         if (PanelYoneticisi.guncelPanel) {
           this.paneliGoster('mutlu');
@@ -174,27 +177,27 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
 
   public async molaTetikle(): Promise<void> {
     const mod = this.guncelMod();
-    const config = vscode.workspace.getConfiguration('kahveKedisi');
-    const isim = config.get<string>('kisiselIsim', 'Geliştirici');
+    const developerName = I18nManager.getDeveloperName();
+    const i18n = I18nManager.getStrings();
 
     if (this.bildirimTuru === 'webview' || this.bildirimTuru === 'herIkisi') {
       this.paneliGoster(mod);
     }
 
     if (this.bildirimTuru === 'bilgiMesaji' || this.bildirimTuru === 'herIkisi') {
-      const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, this.ertelemeSayisi, isim);
+      const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, this.ertelemeSayisi, developerName);
       const secim = await vscode.window.showInformationMessage(
         mesaj,
-        '5 Dk Mola Ver',
-        '5 Dk Ertele',
-        'Mola Karnesi'
+        i18n.btnNotificationBreak,
+        i18n.btnNotificationSnooze,
+        i18n.btnNotificationStats
       );
 
-      if (secim === '5 Dk Mola Ver') {
+      if (secim === i18n.btnNotificationBreak) {
         this.molaBaslat(5);
-      } else if (secim === '5 Dk Ertele') {
+      } else if (secim === i18n.btnNotificationSnooze) {
         this.ertele(5);
-      } else if (secim === 'Mola Karnesi') {
+      } else if (secim === i18n.btnNotificationStats) {
         this.paneliGoster(mod);
       }
     }
@@ -209,10 +212,11 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   }
 
   public ertele(ekDakika: number = 5): void {
+    const i18n = I18nManager.getStrings();
     this.ertelemeSayisi++;
     this.istatistik.molaErtelendi();
     this.calismaSaniyesi = Math.max(0, (this.molaSuresiDakika - ekDakika) * 60);
-    vscode.window.showInformationMessage(`Mola ${ekDakika} dakika ertelendi. Kedi seni izlemeye devam ediyor.`);
+    vscode.window.showInformationMessage(i18n.msgSnoozed(ekDakika));
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {
       this.paneliGoster(this.guncelMod());
@@ -220,12 +224,13 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   }
 
   public sayaciSifirla(): void {
+    const i18n = I18nManager.getStrings();
     this.calismaSaniyesi = 0;
     this.kesintisizSaniye = 0;
     this.ertelemeSayisi = 0;
     this.isBreakActive = false;
     this.molaKalanSaniye = 0;
-    vscode.window.showInformationMessage('Kahve Kedisi: Çalışma sayacı sıfırlandı.');
+    vscode.window.showInformationMessage(i18n.msgReset);
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {
       this.paneliGoster('mutlu');
@@ -233,11 +238,12 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   }
 
   public duraklatVeyaDevamEt(): void {
+    const i18n = I18nManager.getStrings();
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
-      vscode.window.showInformationMessage('Kahve Kedisi duraklatıldı. Kedi dinleniyor.');
+      vscode.window.showInformationMessage(i18n.msgPaused);
     } else {
-      vscode.window.showInformationMessage('Kahve Kedisi devam ediyor.');
+      vscode.window.showInformationMessage(i18n.msgResumed);
     }
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {
@@ -255,7 +261,8 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
       this.calismaSaniyesi,
       this.molaSuresiDakika,
       this.ertelemeSayisi,
-      this.molaKalanSaniye
+      this.molaKalanSaniye,
+      this.isPaused
     );
   }
 

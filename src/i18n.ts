@@ -39,6 +39,7 @@ export interface LocaleStrings {
   soundOn: string;
   soundOff: string;
   sleepToggle: string;
+  resumeToggle: string;
   
   // Status bar
   statusPaused: string;
@@ -70,6 +71,7 @@ export interface LocaleStrings {
   messagesGrumpy: string[];
   messagesBreak: string[];
   messagesLove: string[];
+  messagesPaused: string[];
 }
 
 const TR: LocaleStrings = {
@@ -110,8 +112,9 @@ const TR: LocaleStrings = {
   soundOn: "Ses Açık",
   soundOff: "Ses Kapalı",
   sleepToggle: "Kediyi Uyut / Duraklat",
+  resumeToggle: "Kediyi Uyandır / Devam Et",
   
-  statusPaused: "Kedi Duraklatıldı",
+  statusPaused: "Kedi Dinleniyor (Duraklatıldı)",
   statusBreak: "Mola",
   statusIdle: "Kedi Uyuyor (Boşta)",
   statusBreakTime: "Mola Vakti!",
@@ -129,8 +132,8 @@ const TR: LocaleStrings = {
   msgBreakFinished: "Molanız tamamlandı! Harika bir enerjiyle kodlamaya hazır mısınız?",
   msgSnoozed: (min) => `Mola ${min} dakika ertelendi. Kedi seni izlemeye devam ediyor.`,
   msgReset: "Kahve Kedisi: Çalışma sayacı sıfırlandı.",
-  msgPaused: "Kahve Kedisi duraklatıldı. Kedi dinleniyor.",
-  msgResumed: "Kahve Kedisi devam ediyor.",
+  msgPaused: "Kahve Kedisi duraklatıldı. Kedi mışıl mışıl dinleniyor.",
+  msgResumed: "Kahve Kedisi devam ediyor. Kedi uyandı ve sana odaklandı!",
   msgStatsReset: "Kahve Kedisi: İstatistikler sıfırlandı.",
   
   messagesHappy: [
@@ -167,6 +170,10 @@ const TR: LocaleStrings = {
     "Miyav! Sevgi seviyesi %100 doldu, enerji tazelendi.",
     "Karnımı sevmek tehlikelidir ama sana özel izin veriyorum miyav.",
     "Mırrr... Bu ilgi kod yazma kalitesini artırır (Kedi Enstitüsü onaylı)."
+  ],
+  messagesPaused: [
+    "Zzz... Kedi şekerleme yapıyor. İstediğin zaman 'Devam Et' diyerek sayacı başlatabilirsin.",
+    "Mırrr... Dinlenme modundayım. Kodlamaya hazır olduğunda beni uyandırabilirsin."
   ]
 };
 
@@ -208,8 +215,9 @@ const EN: LocaleStrings = {
   soundOn: "Sound On",
   soundOff: "Sound Off",
   sleepToggle: "Sleep / Pause Cat",
+  resumeToggle: "Wake Up / Resume Cat",
   
-  statusPaused: "Cat Paused",
+  statusPaused: "Cat is Resting (Paused)",
   statusBreak: "Break",
   statusIdle: "Cat Sleeping (Idle)",
   statusBreakTime: "Break Time!",
@@ -227,8 +235,8 @@ const EN: LocaleStrings = {
   msgBreakFinished: "Break finished! Ready to code with fresh energy?",
   msgSnoozed: (min) => `Break postponed by ${min} minutes. The cat is watching you closely.`,
   msgReset: "Coffee Cat: Work timer has been reset.",
-  msgPaused: "Coffee Cat is paused and sleeping peacefully.",
-  msgResumed: "Coffee Cat woke up and is following your focus.",
+  msgPaused: "Coffee Cat is paused and resting peacefully.",
+  msgResumed: "Coffee Cat resumed. The cat is awake and watching your code!",
   msgStatsReset: "Coffee Cat: Statistics have been reset.",
   
   messagesHappy: [
@@ -265,6 +273,10 @@ const EN: LocaleStrings = {
     "Meow! Love meter is at 100%, energy restored!",
     "Belly rubs are usually dangerous, but I grant you special permission today.",
     "Purrr... This affection increases typing speed and focus by 20% (Certified Cat Institute)."
+  ],
+  messagesPaused: [
+    "Zzz... Cat is taking a peaceful nap. Click 'Resume' whenever you are ready.",
+    "Purrr... I am resting. Wake me up when you want to start tracking work again."
   ]
 };
 
@@ -306,7 +318,8 @@ const ES: LocaleStrings = {
   soundOn: "Sonido Activado",
   soundOff: "Sonido Silenciado",
   sleepToggle: "Dormir / Pausar Gato",
-  statusPaused: "Gato Pausado",
+  resumeToggle: "Despertar / Reanudar Gato",
+  statusPaused: "Gato Descansando (Pausado)",
   statusBreak: "Pausa",
   statusIdle: "Gato Durmiendo (Inactivo)",
   statusBreakTime: "¡Hora de la Pausa!",
@@ -323,8 +336,8 @@ const ES: LocaleStrings = {
   msgBreakFinished: "¡Pausa terminada! ¿Listo para programar con energía renovada?",
   msgSnoozed: (min) => `Pausa pospuesta ${min} minutos. El gato te está observando.`,
   msgReset: "Gato del Café: Temporizador reiniciado.",
-  msgPaused: "Gato del Café pausado.",
-  msgResumed: "Gato del Café despierto.",
+  msgPaused: "Gato del Café pausado. El gato está descansando.",
+  msgResumed: "Gato del Café reanudado. ¡El gato está despierto!",
   msgStatsReset: "Gato del Café: Estadísticas reiniciadas.",
   messagesHappy: [
     "¡Miau! Gran sesión de enfoque. Te has ganado un buen café.",
@@ -347,6 +360,10 @@ const ES: LocaleStrings = {
   messagesLove: [
     "Purrrrrr... (El gato ronronea felizmente)",
     "Te estoy amasando con mis patitas. ¡Eres mi programador favorito!"
+  ],
+  messagesPaused: [
+    "Zzz... El gato está durmiendo la siesta. Haz clic en 'Reanudar' cuando estés listo.",
+    "Purrr... Modo de descanso activado."
   ]
 };
 
@@ -387,8 +404,9 @@ const DE: LocaleStrings = {
   tablePostpone: "Verschoben",
   soundOn: "Ton An",
   soundOff: "Ton Aus",
-  sleepToggle: "Katze pausieren / schlafen",
-  statusPaused: "Katze pausiert",
+  sleepToggle: "Katze schlafen legen / Pausieren",
+  resumeToggle: "Katze aufwecken / Fortsetzen",
+  statusPaused: "Katze ruht sich aus (Pausiert)",
   statusBreak: "Pause",
   statusIdle: "Katze schläft (Untätig)",
   statusBreakTime: "Pausenzeit!",
@@ -405,9 +423,13 @@ const DE: LocaleStrings = {
   msgBreakFinished: "Pause beendet! Bereit mit frischer Energie zu coden?",
   msgSnoozed: (min) => `Pause um ${min} Minuten verschoben. Die Katze behält dich im Auge.`,
   msgReset: "Kaffee-Katze: Timer zurückgesetzt.",
-  msgPaused: "Kaffee-Katze pausiert.",
-  msgResumed: "Kaffee-Katze ist wieder wach.",
-  msgStatsReset: "Kaffee-Katze: Statistiken zurückgesetzt."
+  msgPaused: "Kaffee-Katze pausiert. Die Katze ruht sich aus.",
+  msgResumed: "Kaffee-Katze fortgesetzt. Die Katze ist wach!",
+  msgStatsReset: "Kaffee-Katze: Statistiken zurückgesetzt.",
+  messagesPaused: [
+    "Zzz... Die Katze macht ein Nickerchen. Klicke auf 'Fortsetzen', wenn du bereit bist.",
+    "Purrr... Ruhemodus aktiv."
+  ]
 };
 
 const JA: LocaleStrings = {
@@ -447,8 +469,9 @@ const JA: LocaleStrings = {
   tablePostpone: "延期",
   soundOn: "音声オン",
   soundOff: "音声オフ",
-  sleepToggle: "猫をお休みさせる",
-  statusPaused: "猫はお休み中",
+  sleepToggle: "猫をお休みさせる / 一時停止",
+  resumeToggle: "猫を起こす / 再開する",
+  statusPaused: "猫はお休み中（一時停止）",
   statusBreak: "休憩中",
   statusIdle: "猫は居眠り中（アイドル）",
   statusBreakTime: "休憩の時間です！",
@@ -465,9 +488,13 @@ const JA: LocaleStrings = {
   msgBreakFinished: "休憩時間終了です！集中してコードを書きましょう。",
   msgSnoozed: (min) => `休憩を${min}分延期しました。猫が見守っています。`,
   msgReset: "コーヒー猫：タイマーをリセットしました。",
-  msgPaused: "コーヒー猫はお休み中です。",
-  msgResumed: "コーヒー猫が起きました。",
-  msgStatsReset: "コーヒー猫：統計をリセットしました。"
+  msgPaused: "コーヒー猫を一時停止しました。猫は休憩中です。",
+  msgResumed: "コーヒー猫を再開しました。猫が起きました！",
+  msgStatsReset: "コーヒー猫：統計をリセットしました。",
+  messagesPaused: [
+    "Zzz... 猫はお昼寝中です。準備ができたら「再開する」をクリックしてください。",
+    "Purrr... 休憩モード中です。"
+  ]
 };
 
 export class I18nManager {
@@ -487,7 +514,6 @@ export class I18nManager {
       return ayarDil.toLowerCase();
     }
 
-    // VS Code ortam dilini oku (ör: 'tr', 'en-US', 'es', 'de', 'ja')
     const vscodeLang = (vscode.env.language || 'en').toLowerCase();
     if (vscodeLang.startsWith('tr')) return 'tr';
     if (vscodeLang.startsWith('es')) return 'es';
@@ -509,15 +535,13 @@ export class I18nManager {
       return configName.trim();
     }
 
-    // Sistem kullanıcı adını otomatik tespit et
     try {
       const osUser = os.userInfo().username;
       if (osUser && osUser.trim() !== '') {
-        // İlk harfi büyük yap
         return osUser.charAt(0).toUpperCase() + osUser.slice(1);
       }
     } catch {
-      // os.userInfo fallback
+      // fallback
     }
 
     const envUser = process.env.USERNAME || process.env.USER;

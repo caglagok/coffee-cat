@@ -66,7 +66,8 @@ export class PanelYoneticisi {
     calismaSaniye: number = 0,
     hedefDakika: number = 45,
     ertelemeSayisi: number = 0,
-    molaKalanSaniye: number = 0
+    molaKalanSaniye: number = 0,
+    isPaused: boolean = false
   ): PanelYoneticisi {
     const sutun = vscode.ViewColumn.Beside;
     const i18n = I18nManager.getStrings();
@@ -78,7 +79,8 @@ export class PanelYoneticisi {
         calismaSaniye,
         hedefDakika,
         ertelemeSayisi,
-        molaKalanSaniye
+        molaKalanSaniye,
+        isPaused
       );
       return PanelYoneticisi.guncelPanel;
     }
@@ -105,7 +107,8 @@ export class PanelYoneticisi {
       calismaSaniye,
       hedefDakika,
       ertelemeSayisi,
-      molaKalanSaniye
+      molaKalanSaniye,
+      isPaused
     );
     return PanelYoneticisi.guncelPanel;
   }
@@ -115,14 +118,17 @@ export class PanelYoneticisi {
     calismaSaniye: number,
     hedefDakika: number,
     ertelemeSayisi: number,
-    molaKalanSaniye: number = 0
+    molaKalanSaniye: number = 0,
+    isPaused: boolean = false
   ): void {
     const config = vscode.workspace.getConfiguration('kahveKedisi');
     const developerName = I18nManager.getDeveloperName();
     const sesAktif = config.get<boolean>('sesEfektiAktif', true);
 
-    const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, ertelemeSayisi, developerName);
-    const svgContent = this.svgGetir(mod);
+    const mesaj = isPaused
+      ? MesajYoneticisi.rastgeleDuraklatmaMesaji(developerName)
+      : MesajYoneticisi.rastgeleMesajGetir(mod, ertelemeSayisi, developerName);
+    const svgContent = this.svgGetir(isPaused ? 'uykulu' : mod);
     const istatistikVeri = this.istatistik.getVeri();
 
     this.panel.webview.html = this.htmlOlustur(
@@ -135,7 +141,8 @@ export class PanelYoneticisi {
       molaKalanSaniye,
       istatistikVeri,
       sesAktif,
-      developerName
+      developerName,
+      isPaused
     );
   }
 
@@ -212,7 +219,8 @@ export class PanelYoneticisi {
     molaKalanSaniye: number,
     istatistik: ReturnType<IstatistikYoneticisi['getVeri']>,
     sesAktif: boolean,
-    developerName: string
+    developerName: string,
+    isPaused: boolean = false
   ): string {
     const i18n = I18nManager.getStrings();
     const calismaDakika = Math.floor(calismaSaniye / 60);
@@ -238,6 +246,7 @@ export class PanelYoneticisi {
     const iconRotate = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>`;
     const iconCheck = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
     const iconMoon = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`;
+    const iconPlay = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>`;
     const iconSparkles = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>`;
     const iconVolume2 = `<svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`;
     const iconVolumeX = `<svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg>`;
@@ -806,9 +815,8 @@ export class PanelYoneticisi {
           ${sesAktif ? iconVolume2 + `<span>${i18n.soundOn}</span>` : iconVolumeX + `<span>${i18n.soundOff}</span>`}
         </span>
       </div>
-      <div style="cursor: pointer; display: flex; align-items: center; gap: 6px;" onclick="komutGonder('simdilikKapat')">
-        ${iconMoon}
-        <span>${i18n.sleepToggle}</span>
+      <div id="sleepToggleBtn" style="cursor: pointer; display: flex; align-items: center; gap: 6px; ${isPaused ? 'color: var(--accent-peach); font-weight: 600;' : ''}" onclick="komutGonder('simdilikKapat')">
+        ${isPaused ? iconPlay + `<span>${i18n.resumeToggle}</span>` : iconMoon + `<span>${i18n.sleepToggle}</span>`}
       </div>
     </div>
   </div>

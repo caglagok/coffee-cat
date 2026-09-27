@@ -42,4 +42,15 @@ export class MesajYoneticisi {
     const secilen = i18n.messagesLove[Math.floor(Math.random() * i18n.messagesLove.length)];
     return secilen.replace(/geliştirici|developer|programador|entwickler/gi, developerName);
   }
+
+  public static rastgeleDuraklatmaMesaji(isim?: string): string {
+    const i18n = I18nManager.getStrings();
+    const developerName = isim || I18nManager.getDeveloperName();
+    const havuz = i18n.messagesPaused && i18n.messagesPaused.length > 0
+      ? i18n.messagesPaused
+      : ["Zzz..."];
+    const secilen = havuz[Math.floor(Math.random() * havuz.length)];
+    return secilen.replace(/geliştirici|developer|programador|entwickler/gi, developerName);
+  }
 }
+

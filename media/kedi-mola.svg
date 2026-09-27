@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="furGradMola" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFBE76"/>
+      <stop offset="100%" stop-color="#F0932B"/>
+    </linearGradient>
+    <style>
+      .note-1 {
+        animation: floatNote 3s ease-in-out infinite;
+        fill: #E056FD;
+        font-family: sans-serif;
+      }
+      .note-2 {
+        animation: floatNote 3s ease-in-out 1.5s infinite;
+        fill: #686DE0;
+        font-family: sans-serif;
+      }
+      @keyframes floatNote {
+        0% { opacity: 0; transform: translate(0px, 0px) rotate(0deg); }
+        50% { opacity: 1; transform: translate(15px, -20px) rotate(15deg); }
+        100% { opacity: 0; transform: translate(30px, -45px) rotate(-15deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Keyif Çemberi -->
+  <circle cx="160" cy="160" r="140" fill="#E8F8F5" opacity="0.6"/>
+
+  <!-- Müzik Notaları -->
+  <text x="70" y="110" font-size="26" class="note-1">♪</text>
+  <text x="230" y="100" font-size="28" class="note-2">♫</text>
+
+  <!-- Kuyruk -->
+  <path d="M220,230 Q270,200 260,160 Q250,150 240,160 Q245,185 220,215 Z" fill="url(#furGradMola)" stroke="#D35400" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Gövde -->
+  <ellipse cx="160" cy="225" rx="76" ry="63" fill="url(#furGradMola)" stroke="#D35400" stroke-width="4"/>
+  <ellipse cx="160" cy="230" rx="46" ry="38" fill="#FFF8F0"/>
+
+  <!-- Kulaklar -->
+  <polygon points="90,120 105,65 140,105" fill="url(#furGradMola)" stroke="#D35400" stroke-width="4" stroke-linejoin="round"/>
+  <polygon points="98,112 110,75 132,102" fill="#FFAAA6"/>
+
+  <polygon points="230,120 215,65 180,105" fill="url(#furGradMola)" stroke="#D35400" stroke-width="4" stroke-linejoin="round"/>
+  <polygon points="222,112 210,75 188,102" fill="#FFAAA6"/>
+
+  <!-- Kafa -->
+  <circle cx="160" cy="140" r="62" fill="url(#furGradMola)" stroke="#D35400" stroke-width="4"/>
+
+  <!-- Güneş Gözlüğü -->
+  <g>
+    <rect x="110" y="125" width="42" height="30" rx="10" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+    <line x1="115" y1="130" x2="125" y2="150" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+    <rect x="168" y="125" width="42" height="30" rx="10" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+    <line x1="173" y1="130" x2="183" y2="150" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+    <line x1="152" y1="135" x2="168" y2="135" stroke="#1A252F" stroke-width="4"/>
+    <line x1="110" y1="135" x2="95" y2="132" stroke="#1A252F" stroke-width="3"/>
+    <line x1="210" y1="135" x2="225" y2="132" stroke="#1A252F" stroke-width="3"/>
+  </g>
+
+  <!-- Yanaklar -->
+  <ellipse cx="118" cy="162" rx="10" ry="6" fill="#FF758C" opacity="0.8"/>
+  <ellipse cx="202" cy="162" rx="10" ry="6" fill="#FF758C" opacity="0.8"/>
+
+  <!-- Havalı Gülümseme -->
+  <polygon points="156,155 164,155 160,160" fill="#FF758C"/>
+  <path d="M152,165 Q160,174 168,165" fill="none" stroke="#2B1810" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Bıyıklar -->
+  <line x1="90" y1="150" x2="116" y2="154" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="88" y1="162" x2="115" y2="162" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="230" y1="150" x2="204" y2="154" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="232" y1="162" x2="205" y2="162" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Kahve Kupası Pipetli -->
+  <g transform="translate(136, 198)">
+    <path d="M8,10 L40,10 L35,52 L13,52 Z" fill="#2ECC71" stroke="#27AE60" stroke-width="2.5"/>
+    <ellipse cx="24" cy="10" rx="16" ry="4" fill="#27AE60"/>
+    <path d="M24,10 L28,-14 L38,-20" fill="none" stroke="#E74C3C" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="24" cy="30" r="7" fill="#FFFFFF"/>
+    <text x="21" y="34" font-size="10">☕</text>
+  </g>
+
+  <!-- Patiler Kupayı Tutuyor -->
+  <circle cx="138" cy="225" r="10" fill="url(#furGradMola)" stroke="#D35400" stroke-width="2.5"/>
+  <circle cx="182" cy="225" r="10" fill="url(#furGradMola)" stroke="#D35400" stroke-width="2.5"/>
+</svg>

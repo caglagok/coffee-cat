@@ -1,0 +1,128 @@
+{
+  "name": "kahve-kedisi",
+  "displayName": "Kahve Kedisi",
+  "description": "Sevimli, mola hatirlatan ve calisma aliskanliklarini takip eden animasyonlu VS Code kedisi",
+  "version": "1.0.0",
+  "publisher": "kahve-kedisi",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Productivity"
+  ],
+  "keywords": [
+    "coffee",
+    "cat",
+    "break",
+    "timer",
+    "pomodoro",
+    "health",
+    "mola",
+    "kedi"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kahveKedisi.molaGoster",
+        "title": "Mola Zamanı Panelini Aç",
+        "category": "Kahve Kedisi",
+        "icon": "$(heart)"
+      },
+      {
+        "command": "kahveKedisi.istatistikGoster",
+        "title": "Mola Karnesi ve İstatistikler",
+        "category": "Kahve Kedisi",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "kahveKedisi.molaBaslat",
+        "title": "Şimdi Mola Ver",
+        "category": "Kahve Kedisi",
+        "icon": "$(coffee)"
+      },
+      {
+        "command": "kahveKedisi.sayaciSifirla",
+        "title": "Çalışma Sayacını Sıfırla",
+        "category": "Kahve Kedisi",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "kahveKedisi.simdilikKapat",
+        "title": "Bugünlük Kediyi Uyut / Duraklat",
+        "category": "Kahve Kedisi",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "kahveKedisi.kediyiSev",
+        "title": "Kediyi Sev 🐾",
+        "category": "Kahve Kedisi",
+        "icon": "$(sparkle)"
+      }
+    ],
+    "configuration": {
+      "title": "Kahve Kedisi",
+      "properties": {
+        "kahveKedisi.molaSuresiDakika": {
+          "type": "number",
+          "default": 45,
+          "minimum": 1,
+          "maximum": 240,
+          "description": "Kaç dakikada bir kedi seni mola için uyarsın?"
+        },
+        "kahveKedisi.idleTespitiAktif": {
+          "type": "boolean",
+          "default": true,
+          "description": "Klavye veya editör kullanılmıyorsa çalışma sayacı dursun mu?"
+        },
+        "kahveKedisi.idleSuresiDakika": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Kaç dakika işlem yapılmazsa kullanıcı uzakta/boşta (idle) sayılsın?"
+        },
+        "kahveKedisi.bildirimTuru": {
+          "type": "string",
+          "enum": [
+            "webview",
+            "bilgiMesaji",
+            "herIkisi"
+          ],
+          "enumDescriptions": [
+            "Animasyonlu sevimli kedi penceresi aç",
+            "Klasik VS Code bildirim kutusu göster",
+            "Hem bildirim göster hem pencereyi aç"
+          ],
+          "default": "webview",
+          "description": "Mola zamanı geldiğinde uyarı nasıl gösterilsin?"
+        },
+        "kahveKedisi.sesEfektiAktif": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mola ekranında sevimli patileme ve bildirim ses tonu aktif olsun mu?"
+        },
+        "kahveKedisi.kisiselIsim": {
+          "type": "string",
+          "default": "Geliştirici",
+          "description": "Kedinin sana nasıl hitap etmesini istersin?"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3"
+  }
+}

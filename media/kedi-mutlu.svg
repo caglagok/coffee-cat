@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="furGradMutlu" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2E18"/>
+      <stop offset="100%" stop-color="#2D1A0D"/>
+    </linearGradient>
+    <linearGradient id="cheekGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF758C"/>
+      <stop offset="100%" stop-color="#FF7EB3"/>
+    </linearGradient>
+    <style>
+      .tail-anim {
+        transform-origin: 230px 240px;
+        animation: tailWag 2.5s ease-in-out infinite alternate;
+      }
+      .ear-left {
+        transform-origin: 105px 95px;
+        animation: earTwitch 4s ease-in-out infinite;
+      }
+      .ear-right {
+        transform-origin: 215px 95px;
+        animation: earTwitch 4s ease-in-out 0.5s infinite;
+      }
+      .steam-1 {
+        animation: floatSteam 2s ease-in-out infinite;
+      }
+      .steam-2 {
+        animation: floatSteam 2s ease-in-out 0.7s infinite;
+      }
+      .eyes-happy {
+        transform-origin: 160px 145px;
+        animation: happyBlink 3.5s infinite;
+      }
+      @keyframes tailWag {
+        0% { transform: rotate(-8deg); }
+        100% { transform: rotate(18deg); }
+      }
+      @keyframes earTwitch {
+        0%, 90%, 100% { transform: rotate(0deg); }
+        93% { transform: rotate(-6deg); }
+        96% { transform: rotate(4deg); }
+      }
+      @keyframes floatSteam {
+        0% { opacity: 0; transform: translateY(0px) scale(0.8); }
+        50% { opacity: 0.8; transform: translateY(-10px) scale(1.1); }
+        100% { opacity: 0; transform: translateY(-22px) scale(1.3); }
+      }
+      @keyframes happyBlink {
+        0%, 94%, 100% { transform: scaleY(1); }
+        97% { transform: scaleY(0.1); }
+      }
+    </style>
+  </defs>
+
+  <!-- Arka Plan Parlama Çemberi -->
+  <circle cx="160" cy="160" r="140" fill="#FFF8E7" opacity="0.4"/>
+
+  <!-- Kuyruk -->
+  <path class="tail-anim" d="M220,230 Q270,220 260,170 Q255,145 240,155 Q235,175 220,215 Z" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Gövde -->
+  <ellipse cx="160" cy="220" rx="75" ry="65" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="4"/>
+  <!-- Göbek Beyazlığı -->
+  <ellipse cx="160" cy="225" rx="46" ry="40" fill="#FFF5E4"/>
+
+  <!-- Kulaklar -->
+  <!-- Sol Kulak -->
+  <g class="ear-left">
+    <polygon points="90,120 105,65 140,105" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="4" stroke-linejoin="round"/>
+    <polygon points="98,112 110,75 132,102" fill="#FFAAA6"/>
+  </g>
+  <!-- Sağ Kulak -->
+  <g class="ear-right">
+    <polygon points="230,120 215,65 180,105" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="4" stroke-linejoin="round"/>
+    <polygon points="222,112 210,75 188,102" fill="#FFAAA6"/>
+  </g>
+
+  <!-- Kafa -->
+  <circle cx="160" cy="140" r="62" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="4"/>
+
+  <!-- Alın Tekir Çizgileri -->
+  <path d="M160,85 L160,102 M148,88 L152,102 M172,88 L168,102" stroke="#D66B00" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Yanak Kızarıklıkları -->
+  <ellipse cx="122" cy="155" rx="10" ry="6" fill="url(#cheekGrad)" opacity="0.75"/>
+  <ellipse cx="198" cy="155" rx="10" ry="6" fill="url(#cheekGrad)" opacity="0.75"/>
+
+  <!-- Mutlu Gözler (^ ^ Şeklinde) -->
+  <g class="eyes-happy">
+    <path d="M125,138 Q136,124 147,138" fill="none" stroke="#2B1810" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M173,138 Q184,124 195,138" fill="none" stroke="#2B1810" stroke-width="4.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Burun & Ağız -->
+  <polygon points="156,149 164,149 160,155" fill="#FF758C"/>
+  <path d="M160,155 Q152,166 145,158 M160,155 Q168,166 175,158" fill="none" stroke="#2B1810" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Bıyıklar -->
+  <line x1="90" y1="145" x2="120" y2="148" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="88" y1="156" x2="118" y2="155" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="230" y1="145" x2="200" y2="148" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="232" y1="156" x2="202" y2="155" stroke="#2B1810" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Kahve Kupası (Önde duruyor) -->
+  <g transform="translate(130, 205)">
+    <!-- Kupa Kulpu -->
+    <path d="M50,15 C66,15 66,42 50,45" fill="none" stroke="#D66B00" stroke-width="5" stroke-linecap="round"/>
+    <!-- Kupa Gövdesi -->
+    <path d="M8,8 L52,8 C52,46 44,55 30,55 C16,55 8,46 8,8 Z" fill="url(#cupGrad)" stroke="#FFB347" stroke-width="2.5"/>
+    <!-- Kupa Üzerindeki Kedi Pati Deseni -->
+    <circle cx="30" cy="32" r="4.5" fill="#FFB347"/>
+    <circle cx="24" cy="24" r="2" fill="#FFB347"/>
+    <circle cx="30" cy="22" r="2" fill="#FFB347"/>
+    <circle cx="36" cy="24" r="2" fill="#FFB347"/>
+    <!-- Kahve Sıvısı Üstü -->
+    <ellipse cx="30" cy="8" rx="22" ry="5" fill="#6F4E37"/>
+    
+    <!-- Buhar Efektleri -->
+    <path class="steam-1" d="M22,-4 Q28,-14 20,-24" fill="none" stroke="#A88B77" stroke-width="2.5" stroke-linecap="round"/>
+    <path class="steam-2" d="M36,-4 Q42,-14 34,-24" fill="none" stroke="#A88B77" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Patiler (Kupayı tutan) -->
+  <circle cx="132" cy="216" r="11" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="3"/>
+  <circle cx="188" cy="216" r="11" fill="url(#furGradMutlu)" stroke="#D66B00" stroke-width="3"/>
+
+  <!-- Parlama / Sevgi Yıldızları -->
+  <g fill="#FFD700" opacity="0.9">
+    <path d="M65,95 L68,85 L71,95 L81,98 L71,101 L68,111 L65,101 L55,98 Z" />
+    <path d="M250,90 L252,82 L254,90 L262,92 L254,94 L252,102 L250,94 L242,92 Z" />
+  </g>
+</svg>

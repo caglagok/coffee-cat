@@ -5,7 +5,7 @@ import { KediModu, MesajYoneticisi } from './mesajlar';
 import { PanelYoneticisi } from './panel';
 
 export class ZamanlayiciYoneticisi implements vscode.Disposable {
-  private timer: NodeJS.Timeout | null = null;
+  private timer: ReturnType<typeof setInterval> | null = null;
   private calismaSaniyesi: number = 0;
   private kesintisizSaniye: number = 0;
   private molaKalanSaniye: number = 0;

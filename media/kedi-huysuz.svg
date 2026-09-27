@@ -28,10 +28,10 @@
     </style>
   </defs>
 
-  <circle cx="160" cy="160" r="145" stroke="var(--vscode-widget-border, #3A3A5A)" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
+  <circle cx="160" cy="160" r="145" stroke="#741A2F" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.35"/>
 
   <!-- Öfke Çaprazı (#) -->
-  <g class="anger-mark" stroke="#EE5253" stroke-width="2.5" stroke-linecap="round">
+  <g class="anger-mark" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round">
     <path d="M215,80 L220,100"/>
     <path d="M225,82 L230,102"/>
     <path d="M212,87 L232,87"/>
@@ -39,49 +39,49 @@
   </g>
 
   <!-- Kuyruk -->
-  <path class="tail-grumpy" d="M210,225 C265,195 255,150 240,150 C230,150 235,175 210,210" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="tail-grumpy" d="M210,225 C265,195 255,150 240,150 C230,150 235,175 210,210" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Gövde -->
-  <path d="M95,260 C95,205 130,200 160,200 C190,200 225,205 225,260" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M95,260 C95,205 130,200 160,200 C190,200 225,205 225,260" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Kulaklar (Uçak Kulakları / Yatık) -->
-  <path d="M85,140 L70,95 L125,118" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M235,140 L250,95 L195,118" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Kulaklar -->
+  <path d="M85,140 L70,95 L125,118" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M235,140 L250,95 L195,118" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Kafa -->
-  <path d="M125,118 C135,114 148,110 160,110 C172,110 185,114 195,118 C225,128 235,165 222,192 C210,220 110,220 98,192 C85,165 95,128 125,118 Z" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
+  <path d="M125,118 C135,114 148,110 160,110 C172,110 185,114 195,118 C225,128 235,165 222,192 C210,220 110,220 98,192 C85,165 95,128 125,118 Z" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="#241A1F"/>
 
-  <!-- Çatık Kaşlar & Yan Bakış (Lucide Vibe) -->
-  <path d="M122,136 L148,144" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round"/>
-  <circle cx="136" cy="149" r="4" fill="#EE5253"/>
+  <!-- Çatık Kaşlar & Gözler -->
+  <path d="M122,136 L148,144" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="136" cy="149" r="4" fill="#FFC6A8"/>
 
-  <path d="M198,136 L172,144" stroke="#EE5253" stroke-width="3.5" stroke-linecap="round"/>
-  <circle cx="184" cy="149" r="4" fill="#EE5253"/>
+  <path d="M198,136 L172,144" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="184" cy="149" r="4" fill="#FFC6A8"/>
 
   <!-- Burun & Ters Ağız -->
-  <path d="M157,156 L163,156 L160,160 Z" fill="#EE5253"/>
-  <path d="M148,168 C156,162 164,162 172,168" stroke="#EE5253" stroke-width="3" stroke-linecap="round"/>
+  <path d="M157,156 L163,156 L160,160 Z" fill="#FFC6A8"/>
+  <path d="M148,168 C156,162 164,162 172,168" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
 
   <!-- Bıyıklar -->
-  <line x1="85" y1="150" x2="114" y2="153" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
-  <line x1="88" y1="162" x2="114" y2="159" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
-  <line x1="235" y1="150" x2="206" y2="153" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
-  <line x1="232" y1="162" x2="206" y2="159" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
+  <line x1="85" y1="150" x2="114" y2="153" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="88" y1="162" x2="114" y2="159" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="235" y1="150" x2="206" y2="153" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="232" y1="162" x2="206" y2="159" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Sol Pati (Belinde) -->
-  <path d="M115,225 C108,230 115,242 125,240" stroke="#EE5253" stroke-width="3" stroke-linecap="round"/>
+  <!-- Sol Pati -->
+  <path d="M115,225 C108,230 115,242 125,240" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Sağ Pati (Klavyeye tık tık yapan) -->
+  <!-- Sağ Pati -->
   <g class="paw-tap">
-    <path d="M190,215 C198,220 205,215 200,225" stroke="#EE5253" stroke-width="3" stroke-linecap="round"/>
-    <line x1="188" y1="210" x2="185" y2="204" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
-    <line x1="196" y1="208" x2="196" y2="202" stroke="#EE5253" stroke-width="2" stroke-linecap="round"/>
+    <path d="M190,215 C198,220 205,215 200,225" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
+    <line x1="188" y1="210" x2="185" y2="204" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="196" y1="208" x2="196" y2="202" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
   </g>
 
-  <!-- Minimal Çizgi Klavye -->
-  <rect x="115" y="252" width="90" height="12" rx="3" stroke="var(--vscode-widget-border, #636E72)" stroke-width="2"/>
-  <line x1="125" y1="258" x2="135" y2="258" stroke="var(--vscode-widget-border, #636E72)" stroke-width="2" stroke-linecap="round"/>
-  <line x1="142" y1="258" x2="162" y2="258" stroke="var(--vscode-widget-border, #636E72)" stroke-width="2" stroke-linecap="round"/>
-  <line x1="169" y1="258" x2="179" y2="258" stroke="var(--vscode-widget-border, #636E72)" stroke-width="2" stroke-linecap="round"/>
-  <line x1="186" y1="258" x2="196" y2="258" stroke="var(--vscode-widget-border, #636E72)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Klavye Çizgisi -->
+  <rect x="115" y="252" width="90" height="12" rx="3" stroke="#741A2F" stroke-width="2"/>
+  <line x1="125" y1="258" x2="135" y2="258" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="142" y1="258" x2="162" y2="258" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="169" y1="258" x2="179" y2="258" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="186" y1="258" x2="196" y2="258" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round"/>
 </svg>

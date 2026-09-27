@@ -44,64 +44,61 @@
     </style>
   </defs>
 
-  <!-- Arka Plan İnce Çizgi Çemberi -->
-  <circle cx="160" cy="160" r="145" stroke="var(--vscode-widget-border, #3A3A5A)" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
+  <circle cx="160" cy="160" r="145" stroke="#741A2F" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.35"/>
 
-  <!-- Kuyruk (Minimal Çizgi) -->
-  <path class="tail-anim" d="M210,230 C260,225 265,175 245,155 C235,145 225,160 235,175 C245,190 230,220 205,225" stroke="#FF9F43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Kuyruk -->
+  <path class="tail-anim" d="M210,230 C260,225 265,175 245,155 C235,145 225,160 235,175 C245,190 230,220 205,225" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Gövde Çizgisi -->
-  <path d="M95,260 C95,200 130,195 160,195 C190,195 225,200 225,260" stroke="#FF9F43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gövde -->
+  <path d="M95,260 C95,200 130,195 160,195 C190,195 225,200 225,260" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Kulaklar -->
   <g class="ear-left">
-    <path d="M98,125 L92,68 L138,102" stroke="#FF9F43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M102,112 L100,82 L128,103" stroke="#FFAAA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M98,125 L92,68 L138,102" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M102,112 L100,82 L128,103" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g class="ear-right">
-    <path d="M222,125 L228,68 L182,102" stroke="#FF9F43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M218,112 L220,82 L192,103" stroke="#FFAAA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M222,125 L228,68 L182,102" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M218,112 L220,82 L192,103" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
-  <!-- Kafa Çizgisi -->
-  <path d="M138,102 C145,100 155,98 160,98 C165,98 175,100 182,102 C218,112 230,150 220,185 C210,215 110,215 100,185 C90,150 102,112 138,102 Z" stroke="#FF9F43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
+  <!-- Kafa -->
+  <path d="M138,102 C145,100 155,98 160,98 C165,98 175,100 182,102 C218,112 230,150 220,185 C210,215 110,215 100,185 C90,150 102,112 138,102 Z" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="#241A1F"/>
 
-  <!-- Minimal Alın Çizgileri -->
-  <path d="M160,105 L160,116 M152,108 L152,117 M168,108 L168,117" stroke="#FF9F43" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Alın Çizgileri -->
+  <path d="M160,105 L160,116 M152,108 L152,117 M168,108 L168,117" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round"/>
 
-  <!-- Mutlu Gözler (Lucide Style ^ ^) -->
+  <!-- Mutlu Gözler -->
   <g class="eye-blink">
-    <path d="M125,142 C131,133 141,133 147,142" stroke="#FFB347" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M173,142 C179,133 189,133 195,142" stroke="#FFB347" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M125,142 C131,133 141,133 147,142" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M173,142 C179,133 189,133 195,142" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
   </g>
 
-  <!-- Burun & Gülümseyen Ağız -->
-  <path d="M157,152 L163,152 L160,156 Z" fill="#FF758C"/>
-  <path d="M160,156 L160,160 M160,160 C154,166 146,164 142,160 M160,160 C166,166 174,164 178,160" stroke="#FF9F43" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Burun & Ağız -->
+  <path d="M157,152 L163,152 L160,156 Z" fill="#FFC6A8"/>
+  <path d="M160,156 L160,160 M160,160 C154,166 146,164 142,160 M160,160 C166,166 174,164 178,160" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Minimal Bıyıklar -->
-  <line x1="88" y1="152" x2="114" y2="155" stroke="#FF9F43" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-  <line x1="86" y1="162" x2="112" y2="162" stroke="#FF9F43" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-  <line x1="232" y1="152" x2="206" y2="155" stroke="#FF9F43" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-  <line x1="234" y1="162" x2="208" y2="162" stroke="#FF9F43" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <!-- Bıyıklar -->
+  <line x1="88" y1="152" x2="114" y2="155" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <line x1="86" y1="162" x2="112" y2="162" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <line x1="232" y1="152" x2="206" y2="155" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <line x1="234" y1="162" x2="208" y2="162" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
 
-  <!-- İçi Boş Modern Kahve Kupası (Ön Çizgi) -->
+  <!-- Kahve Kupası -->
   <g transform="translate(132, 205)">
-    <path d="M8,10 L48,10 L44,48 C44,54 38,58 28,58 C18,58 12,54 12,48 Z" stroke="#FECA57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
-    <!-- Kupa Kulpu -->
-    <path d="M47,18 C58,18 58,38 45,40" stroke="#FECA57" stroke-width="3" stroke-linecap="round"/>
-    <!-- Mini Pati Deseni -->
-    <circle cx="28" cy="34" r="3" stroke="#FECA57" stroke-width="1.5"/>
-    <circle cx="23" cy="27" r="1.5" fill="#FECA57"/>
-    <circle cx="28" cy="25" r="1.5" fill="#FECA57"/>
-    <circle cx="33" cy="27" r="1.5" fill="#FECA57"/>
+    <path d="M8,10 L48,10 L44,48 C44,54 38,58 28,58 C18,58 12,54 12,48 Z" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="#741A2F"/>
+    <path d="M47,18 C58,18 58,38 45,40" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
     
-    <!-- Buharlar -->
-    <path class="steam-1" d="M22,2 C20,-4 25,-8 22,-14" stroke="#FECA57" stroke-width="2" stroke-linecap="round" fill="none"/>
-    <path class="steam-2" d="M34,2 C32,-4 37,-8 34,-14" stroke="#FECA57" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle cx="28" cy="34" r="3" stroke="#FFC6A8" stroke-width="1.5"/>
+    <circle cx="23" cy="27" r="1.5" fill="#FFC6A8"/>
+    <circle cx="28" cy="25" r="1.5" fill="#FFC6A8"/>
+    <circle cx="33" cy="27" r="1.5" fill="#FFC6A8"/>
+    
+    <path class="steam-1" d="M22,2 C20,-4 25,-8 22,-14" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path class="steam-2" d="M34,2 C32,-4 37,-8 34,-14" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" fill="none"/>
   </g>
 
-  <!-- Kupayı Tutan Patiler -->
-  <path d="M125,225 C132,220 138,228 135,235" stroke="#FF9F43" stroke-width="3" stroke-linecap="round"/>
-  <path d="M195,225 C188,220 182,228 185,235" stroke="#FF9F43" stroke-width="3" stroke-linecap="round"/>
+  <!-- Patiler -->
+  <path d="M125,225 C132,220 138,228 135,235" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M195,225 C188,220 182,228 185,235" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
 </svg>

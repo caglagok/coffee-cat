@@ -35,6 +35,7 @@ export class PanelYoneticisi {
             sayi: yeniSayi,
             mesaj: sevgiMesaji
           });
+          this.onKomutCallback('aktivite');
           return;
         }
 
@@ -42,6 +43,7 @@ export class PanelYoneticisi {
           await this.istatistik.istatistikleriSifirla();
           this.durumGuncelle('mutlu', 0, 45, 0, 0);
           vscode.window.showInformationMessage('Kahve Kedisi: İstatistikler sıfırlandı.');
+          this.onKomutCallback('aktivite');
           return;
         }
 
@@ -131,6 +133,37 @@ export class PanelYoneticisi {
     );
   }
 
+  public calismaSayaciniGuncelle(
+    calismaSaniye: number,
+    hedefDakika: number,
+    ertelemeSayisi: number
+  ): void {
+    const calismaDakika = Math.floor(calismaSaniye / 60);
+    const calismaKalanSaniye = calismaSaniye % 60;
+    const hedefSaniye = Math.max(60, hedefDakika * 60);
+    const yuzde = Math.min(100, Math.round((calismaSaniye / hedefSaniye) * 1000) / 10);
+
+    let mutlulukPuani = 100 - ertelemeSayisi * 25;
+    if (calismaDakika > hedefDakika) {
+      mutlulukPuani -= Math.min(40, (calismaDakika - hedefDakika) * 2);
+    }
+    mutlulukPuani = Math.max(10, Math.min(100, mutlulukPuani));
+
+    const bugun = this.istatistik.getBugun();
+
+    this.panel.webview.postMessage({
+      tip: 'calismaSayaciGuncelle',
+      calismaSaniye,
+      calismaDakika,
+      calismaKalanSaniye,
+      hedefDakika,
+      yuzde,
+      mutlulukPuani,
+      bugunCalismaDakika: bugun.toplamCalismaDakika,
+      enUzunKesintisizDakika: bugun.enUzunKesintisizDakika
+    });
+  }
+
   public molaSayaciniGuncelle(molaKalanSaniye: number): void {
     this.panel.webview.postMessage({
       tip: 'molaSayaciGuncelle',
@@ -156,7 +189,7 @@ export class PanelYoneticisi {
     } catch (e) {
       console.error('SVG dosyası okunamadı:', e);
     }
-    return `<div style="text-align: center; padding: 20px;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path></svg></div>`;
+    return `<div style="text-align: center; padding: 20px;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#741A2F" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path></svg></div>`;
   }
 
   private htmlOlustur(
@@ -171,19 +204,21 @@ export class PanelYoneticisi {
     sesAktif: boolean
   ): string {
     const calismaDakika = Math.floor(calismaSaniye / 60);
-    const yuzde = Math.min(100, Math.round((calismaDakika / Math.max(1, hedefDakika)) * 100));
+    const calismaKalanSaniye = calismaSaniye % 60;
+    const hedefSaniye = Math.max(60, hedefDakika * 60);
+    const yuzde = Math.min(100, Math.round((calismaSaniye / hedefSaniye) * 1000) / 10);
 
     const molaDakika = Math.floor(molaKalanSaniye / 60);
     const molaSaniye = molaKalanSaniye % 60;
     const molaZamaniStr = `${molaDakika}:${molaSaniye < 10 ? '0' : ''}${molaSaniye}`;
 
-    let mutlulukPuani = 100 - (ertelemeSayisi * 25);
+    let mutlulukPuani = 100 - ertelemeSayisi * 25;
     if (calismaDakika > hedefDakika) {
       mutlulukPuani -= Math.min(40, (calismaDakika - hedefDakika) * 2);
     }
     mutlulukPuani = Math.max(10, Math.min(100, mutlulukPuani));
 
-    // Lucide / Heroicon Modern Outline SVG İkon Seti (İçi Boş / Stroke Tabanlı)
+    // Lucide / Heroicon İçi Boş Outline SVG İkonlar
     const iconCoffee = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><line x1="6" y1="2" x2="6" y2="4"></line><line x1="10" y1="2" x2="10" y2="4"></line><line x1="14" y1="2" x2="14" y2="4"></line></svg>`;
     const iconClock = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
     const iconHeart = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>`;
@@ -208,17 +243,17 @@ export class PanelYoneticisi {
   <title>Kahve Kedisi</title>
   <style>
     :root {
-      --bg-primary: var(--vscode-editor-background, #1e1e2e);
-      --card-bg: var(--vscode-sideBar-background, #252538);
-      --card-border: var(--vscode-widget-border, rgba(255, 255, 255, 0.1));
-      --text-main: var(--vscode-editor-foreground, #cdd6f4);
-      --text-muted: var(--vscode-descriptionForeground, #a6adc8);
-      --accent-orange: #ff9f43;
-      --accent-green: #2ecc71;
-      --accent-purple: #9b59b6;
-      --accent-red: #ee5253;
-      --btn-primary-bg: #ff9f43;
-      --btn-primary-text: #1e1e2e;
+      --bg-primary: var(--vscode-editor-background, #1A1316);
+      --card-bg: var(--vscode-sideBar-background, #241A1F);
+      --card-border: rgba(255, 198, 168, 0.18);
+      --text-main: var(--vscode-editor-foreground, #F5EAE7);
+      --text-muted: var(--vscode-descriptionForeground, #C4A7A9);
+      --accent-burgundy: #741A2F;
+      --accent-burgundy-light: #9B2844;
+      --accent-peach: #FFC6A8;
+      --accent-peach-light: #FFE2D4;
+      --accent-peach-dark: #EAA888;
+      --accent-green: #4EAA78;
     }
 
     * {
@@ -269,7 +304,7 @@ export class PanelYoneticisi {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: var(--accent-orange);
+      color: var(--accent-peach);
     }
 
     .tab-buttons {
@@ -292,9 +327,9 @@ export class PanelYoneticisi {
     }
 
     .tab-btn.active, .tab-btn:hover {
-      background: var(--card-bg);
-      color: var(--text-main);
-      border-color: var(--accent-orange);
+      background: var(--accent-burgundy);
+      color: var(--accent-peach);
+      border-color: var(--accent-peach);
     }
 
     .cat-stage {
@@ -306,7 +341,7 @@ export class PanelYoneticisi {
       flex-direction: column;
       align-items: center;
       position: relative;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     }
 
     .cat-avatar-container {
@@ -329,8 +364,9 @@ export class PanelYoneticisi {
       position: absolute;
       bottom: -6px;
       right: 10px;
-      background: rgba(0, 0, 0, 0.65);
-      color: #fff;
+      background: var(--accent-burgundy);
+      color: var(--accent-peach);
+      border: 1px solid var(--accent-peach);
       font-size: 0.72rem;
       padding: 3px 8px;
       border-radius: 12px;
@@ -343,7 +379,7 @@ export class PanelYoneticisi {
 
     .floating-heart {
       position: absolute;
-      color: #ff758c;
+      color: var(--accent-peach);
       pointer-events: none;
       animation: floatUp 1s ease-out forwards;
     }
@@ -387,7 +423,7 @@ export class PanelYoneticisi {
       padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .meter-header {
@@ -400,8 +436,8 @@ export class PanelYoneticisi {
 
     .progress-bar-bg {
       width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
+      height: 10px;
+      background: rgba(255, 198, 168, 0.1);
       border-radius: 6px;
       overflow: hidden;
       position: relative;
@@ -410,17 +446,17 @@ export class PanelYoneticisi {
     .progress-bar-fill {
       height: 100%;
       width: ${yuzde}%;
-      background: linear-gradient(90deg, #ff9f43, ${yuzde > 80 ? '#ee5253' : '#ffbe76'});
+      background: linear-gradient(90deg, var(--accent-burgundy), var(--accent-peach));
       border-radius: 6px;
-      transition: width 0.5s ease;
+      transition: width 0.4s ease-out;
     }
 
     .break-timer-card {
       display: ${mod === 'mola' ? 'flex' : 'none'};
       flex-direction: column;
       align-items: center;
-      background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(39, 174, 96, 0.05));
-      border: 1.5px solid var(--accent-green);
+      background: linear-gradient(135deg, rgba(116, 26, 47, 0.35), rgba(255, 198, 168, 0.1));
+      border: 1.5px solid var(--accent-peach);
       border-radius: 16px;
       padding: 20px;
       gap: 8px;
@@ -429,7 +465,7 @@ export class PanelYoneticisi {
     .break-countdown {
       font-size: 2.8rem;
       font-weight: 800;
-      color: var(--accent-green);
+      color: var(--accent-peach);
       letter-spacing: 2px;
       font-variant-numeric: tabular-nums;
     }
@@ -456,33 +492,37 @@ export class PanelYoneticisi {
     }
 
     .btn-break-primary {
-      background: linear-gradient(135deg, #ff9f43, #f0932b);
-      color: #1e1e2e;
+      background: linear-gradient(135deg, var(--accent-burgundy), var(--accent-burgundy-light));
+      color: var(--accent-peach);
+      border: 1px solid var(--accent-peach);
       grid-column: span 2;
       font-size: 1rem;
       padding: 14px;
-      box-shadow: 0 4px 14px rgba(255, 159, 67, 0.3);
+      box-shadow: 0 4px 14px rgba(116, 26, 47, 0.4);
     }
 
     .btn-break-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(255, 159, 67, 0.45);
+      box-shadow: 0 6px 18px rgba(116, 26, 47, 0.6);
+      background: linear-gradient(135deg, var(--accent-burgundy-light), #B53252);
     }
 
     .btn-snooze {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 198, 168, 0.08);
       color: var(--text-main);
       border: 1px solid var(--card-border);
     }
 
     .btn-snooze:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: var(--accent-orange);
+      background: rgba(255, 198, 168, 0.16);
+      border-color: var(--accent-peach);
+      color: var(--accent-peach);
     }
 
     .btn-finish-break {
-      background: linear-gradient(135deg, #2ecc71, #27ae60);
-      color: #fff;
+      background: linear-gradient(135deg, var(--accent-burgundy), var(--accent-burgundy-light));
+      color: var(--accent-peach);
+      border: 1px solid var(--accent-peach);
       grid-column: span 2;
       font-size: 1rem;
       padding: 14px;
@@ -510,7 +550,7 @@ export class PanelYoneticisi {
     .stat-badge .stat-value {
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--accent-orange);
+      color: var(--accent-peach);
     }
 
     .stat-badge .stat-label {
@@ -551,7 +591,7 @@ export class PanelYoneticisi {
     }
 
     .stats-table th {
-      color: var(--text-muted);
+      color: var(--accent-peach);
       font-weight: 600;
     }
 
@@ -605,7 +645,7 @@ export class PanelYoneticisi {
       </div>
 
       <div class="break-timer-card" id="breakTimerCard">
-        <div style="font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+        <div style="font-size: 0.9rem; color: var(--accent-peach); display: flex; align-items: center; gap: 6px;">
           ${iconCoffee}
           <span>MOLA DEVAM EDİYOR</span>
         </div>
@@ -619,14 +659,16 @@ export class PanelYoneticisi {
             ${iconClock}
             <span>Kesintisiz Odaklanma</span>
           </span>
-          <span><strong>${calismaDakika} dk</strong> / ${hedefDakika} dk</span>
+          <span id="workTimeHeader">
+            <strong id="workTimeMinutes" style="color: var(--accent-peach);">${calismaDakika} dk ${calismaKalanSaniye > 0 ? calismaKalanSaniye + ' sn' : ''}</strong> / ${hedefDakika} dk
+          </span>
         </div>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressBarFill"></div>
+          <div class="progress-bar-fill" id="progressBarFill" style="width: ${yuzde}%;"></div>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
           <span>Kedi Mutluluğu: %<span id="catHappiness">${mutlulukPuani}</span></span>
-          <span>${ertelemeSayisi > 0 ? `${ertelemeSayisi} kez ertelendi` : 'Hedefe uygun'}</span>
+          <span id="workStatusText">${ertelemeSayisi > 0 ? `${ertelemeSayisi} kez ertelendi` : 'Hedefe uygun'}</span>
         </div>
       </div>
 
@@ -675,7 +717,7 @@ export class PanelYoneticisi {
     <!-- İSTATİSTİK / MOLA KARNESİ GÖRÜNÜMÜ -->
     <div id="istatistikGorunum" class="stats-tab-content">
       <div class="stats-card">
-        <h3 style="color: var(--accent-orange); font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+        <h3 style="color: var(--accent-peach); font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
           ${iconTrophy}
           <span>Genel Başarı Tablosu</span>
         </h3>
@@ -700,7 +742,7 @@ export class PanelYoneticisi {
       </div>
 
       <div class="stats-card">
-        <h3 style="font-size: 0.95rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+        <h3 style="font-size: 0.95rem; color: var(--accent-peach); display: flex; align-items: center; gap: 8px;">
           ${iconCalendar}
           <span>Son Günlerin Mola Karnesi</span>
         </h3>
@@ -823,7 +865,7 @@ export class PanelYoneticisi {
       const rect = container.getBoundingClientRect();
       const heart = document.createElement('div');
       heart.className = 'floating-heart';
-      heart.innerHTML = \`<svg width="22" height="22" viewBox="0 0 24 24" fill="#FF758C" stroke="#FF758C" stroke-width="1.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>\`;
+      heart.innerHTML = \`<svg width="22" height="22" viewBox="0 0 24 24" fill="#FFC6A8" stroke="#741A2F" stroke-width="1.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>\`;
 
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -872,12 +914,44 @@ export class PanelYoneticisi {
     window.addEventListener('message', event => {
       const msg = event.data;
       if (msg.tip === 'sevgiGuncelle') {
-        document.getElementById('badgePets').innerText = msg.sayi;
-        document.getElementById('speechBubble').innerText = msg.mesaj;
+        const badgePets = document.getElementById('badgePets');
+        if (badgePets) badgePets.innerText = msg.sayi;
+        const speechBubble = document.getElementById('speechBubble');
+        if (speechBubble) speechBubble.innerText = msg.mesaj;
+      } else if (msg.tip === 'calismaSayaciGuncelle') {
+        // Canlı ilerleme çubuğu ve süre güncellemesi
+        const fillEl = document.getElementById('progressBarFill');
+        if (fillEl) {
+          fillEl.style.width = msg.yuzde + '%';
+        }
+
+        const workTimeEl = document.getElementById('workTimeMinutes');
+        if (workTimeEl) {
+          const snMetin = msg.calismaKalanSaniye > 0 ? ' ' + msg.calismaKalanSaniye + ' sn' : '';
+          workTimeEl.innerText = msg.calismaDakika + ' dk' + snMetin;
+        }
+
+        const catHappinessEl = document.getElementById('catHappiness');
+        if (catHappinessEl) {
+          catHappinessEl.innerText = msg.mutlulukPuani;
+        }
+
+        const badgeWorkMin = document.getElementById('badgeWorkMin');
+        if (badgeWorkMin) {
+          badgeWorkMin.innerText = msg.bugunCalismaDakika + 'm';
+        }
+
+        const badgeMaxSession = document.getElementById('badgeMaxSession');
+        if (badgeMaxSession) {
+          badgeMaxSession.innerText = msg.enUzunKesintisizDakika + 'm';
+        }
       } else if (msg.tip === 'molaSayaciGuncelle') {
         const dk = Math.floor(msg.kalanSaniye / 60);
         const sn = msg.kalanSaniye % 60;
-        document.getElementById('breakTimerDisplay').innerText = dk + ':' + (sn < 10 ? '0' : '') + sn;
+        const breakTimerDisplay = document.getElementById('breakTimerDisplay');
+        if (breakTimerDisplay) {
+          breakTimerDisplay.innerText = dk + ':' + (sn < 10 ? '0' : '') + sn;
+        }
       }
     });
   </script>

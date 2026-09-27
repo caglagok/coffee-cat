@@ -163,6 +163,13 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
       this.isPaused,
       this.molaKalanSaniye
     );
+    if (PanelYoneticisi.guncelPanel && !this.isBreakActive && !this.isPaused) {
+      PanelYoneticisi.guncelPanel.calismaSayaciniGuncelle(
+        this.calismaSaniyesi,
+        this.molaSuresiDakika,
+        this.ertelemeSayisi
+      );
+    }
   }
 
   public async molaTetikle(): Promise<void> {
@@ -253,6 +260,9 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   }
 
   private panelKomutuYakala(komut: string, veri?: any): void {
+    this.sonAktiviteZamani = Date.now();
+    this.isIdle = false;
+
     switch (komut) {
       case 'molaBaslat':
         const sure = veri?.sureDakika || 5;

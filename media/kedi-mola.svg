@@ -3,12 +3,12 @@
     <style>
       .note-1 {
         animation: floatNote 3s ease-in-out infinite;
-        fill: #2ECC71;
+        fill: #FFC6A8;
         font-family: sans-serif;
       }
       .note-2 {
         animation: floatNote 3s ease-in-out 1.5s infinite;
-        fill: #2ECC71;
+        fill: #FFC6A8;
         font-family: sans-serif;
       }
       @keyframes floatNote {
@@ -19,45 +19,44 @@
     </style>
   </defs>
 
-  <circle cx="160" cy="160" r="145" stroke="#2ECC71" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
+  <circle cx="160" cy="160" r="145" stroke="#741A2F" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
 
   <!-- Notalar -->
   <text x="75" y="110" font-size="24" class="note-1">♪</text>
   <text x="235" y="100" font-size="26" class="note-2">♫</text>
 
   <!-- Gövde -->
-  <path d="M95,260 C95,200 130,195 160,195 C190,195 225,200 225,260" stroke="#2ECC71" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M95,260 C95,200 130,195 160,195 C190,195 225,200 225,260" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Kulaklar -->
-  <path d="M98,125 L92,68 L138,102" stroke="#2ECC71" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M222,125 L228,68 L182,102" stroke="#2ECC71" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M98,125 L92,68 L138,102" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M222,125 L228,68 L182,102" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Kafa -->
-  <path d="M138,102 C145,100 155,98 160,98 C165,98 175,100 182,102 C218,112 230,150 220,185 C210,215 110,215 100,185 C90,150 102,112 138,102 Z" stroke="#2ECC71" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
+  <path d="M138,102 C145,100 155,98 160,98 C165,98 175,100 182,102 C218,112 230,150 220,185 C210,215 110,215 100,185 C90,150 102,112 138,102 Z" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="#241A1F"/>
 
-  <!-- Güneş Gözlüğü (Modern Minimalist Çerçeve) -->
-  <g stroke="#2ECC71" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="115" y="132" width="38" height="26" rx="6" fill="#1E1E2E"/>
-    <rect x="167" y="132" width="38" height="26" rx="6" fill="#1E1E2E"/>
+  <!-- Güneş Gözlüğü -->
+  <g stroke="#FFC6A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="115" y="132" width="38" height="26" rx="6" fill="#741A2F"/>
+    <rect x="167" y="132" width="38" height="26" rx="6" fill="#741A2F"/>
     <line x1="153" y1="140" x2="167" y2="140"/>
     <line x1="115" y1="140" x2="102" y2="137"/>
     <line x1="205" y1="140" x2="218" y2="137"/>
-    <!-- Cam parlaması -->
-    <line x1="122" y1="138" x2="130" y2="152" stroke="#2ECC71" stroke-width="1.5" opacity="0.6"/>
-    <line x1="174" y1="138" x2="182" y2="152" stroke="#2ECC71" stroke-width="1.5" opacity="0.6"/>
+    <line x1="122" y1="138" x2="130" y2="152" stroke="#FFC6A8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="174" y1="138" x2="182" y2="152" stroke="#FFC6A8" stroke-width="1.5" opacity="0.6"/>
   </g>
 
-  <!-- Havalı Gülümseme -->
-  <path d="M150,170 C158,176 166,176 174,170" stroke="#2ECC71" stroke-width="3" stroke-linecap="round"/>
+  <!-- Gülümseme -->
+  <path d="M150,170 C158,176 166,176 174,170" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Pipetli Soğuk Kahve Bardağı -->
+  <!-- Soğuk Kahve Bardağı -->
   <g transform="translate(138, 202)">
-    <path d="M6,8 L38,8 L33,48 C33,52 28,54 22,54 C16,54 11,52 11,48 Z" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
-    <path d="M22,8 L25,-10 L34,-14" stroke="#2ECC71" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <circle cx="22" cy="28" r="5" stroke="#2ECC71" stroke-width="1.5"/>
+    <path d="M6,8 L38,8 L33,48 C33,52 28,54 22,54 C16,54 11,52 11,48 Z" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="#741A2F"/>
+    <path d="M22,8 L25,-10 L34,-14" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="22" cy="28" r="5" stroke="#FFC6A8" stroke-width="1.5"/>
   </g>
 
   <!-- Patiler -->
-  <path d="M136,225 C142,220 148,228 145,235" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M184,225 C178,220 172,228 175,235" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M136,225 C142,220 148,228 145,235" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M184,225 C178,220 172,228 175,235" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round"/>
 </svg>

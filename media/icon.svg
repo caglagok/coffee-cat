@@ -1,20 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
   <defs>
     <linearGradient id="iconBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1E2E"/>
-      <stop offset="100%" stop-color="#2D2B55"/>
-    </linearGradient>
-    <linearGradient id="iconAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF9F43"/>
-      <stop offset="100%" stop-color="#FECA57"/>
+      <stop offset="0%" stop-color="#241A1F"/>
+      <stop offset="100%" stop-color="#1A1316"/>
     </linearGradient>
   </defs>
 
   <!-- Arka Plan -->
-  <rect width="128" height="128" rx="28" fill="url(#iconBgGrad)" stroke="#3A3A5A" stroke-width="2"/>
+  <rect width="128" height="128" rx="28" fill="url(#iconBgGrad)" stroke="#741A2F" stroke-width="2.5"/>
 
-  <!-- Modern Çizgisel Kedi ve Kahve Kupası (Minimalist Line Art) -->
-  <g stroke="url(#iconAccent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Çizgisel Kedi & Kahve (#741A2F ve #FFC6A8) -->
+  <g stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
     <!-- Sol Kulak -->
     <path d="M42,52 L42,34 L58,46"/>
     <!-- Sağ Kulak -->
@@ -24,27 +20,26 @@
     <!-- Yanaklar & Kafa Hattı -->
     <path d="M38,62 C38,78 50,86 64,86 C78,86 90,78 90,62"/>
     
-    <!-- İçi Boş Minimalist Gözler (Mutlu Çizgi) -->
+    <!-- Gözler -->
     <path d="M50,58 C53,54 57,54 60,58"/>
     <path d="M68,58 C71,54 75,54 78,58"/>
     
-    <!-- Burun & Ağız Hattı -->
+    <!-- Burun & Ağız -->
     <path d="M64,64 L64,68 M64,68 C61,71 58,71 56,69 M64,68 C67,71 70,71 72,69"/>
 
-    <!-- Kahve Kupası Çizgisi (Ön Plan) -->
-    <path d="M46,86 L82,86 L80,106 C80,111 74,115 64,115 C54,115 48,111 48,106 Z" fill="#1E1E2E"/>
-    <!-- Kupa Kulpu -->
+    <!-- Kahve Kupası -->
+    <path d="M46,86 L82,86 L80,106 C80,111 74,115 64,115 C54,115 48,111 48,106 Z" fill="#741A2F"/>
     <path d="M81,90 C88,90 89,102 80,103"/>
     
-    <!-- Modern Buhar Çizgileri -->
-    <path d="M58,78 C57,75 59,73 58,70" stroke-width="2.5" opacity="0.8"/>
+    <!-- Buhar -->
+    <path d="M58,78 C57,75 59,73 58,70" stroke-width="2.5" opacity="0.9"/>
     <path d="M64,77 C63,74 65,72 64,69" stroke-width="2.5" opacity="0.9"/>
-    <path d="M70,78 C69,75 71,73 70,70" stroke-width="2.5" opacity="0.8"/>
+    <path d="M70,78 C69,75 71,73 70,70" stroke-width="2.5" opacity="0.9"/>
   </g>
 
-  <!-- Mini Pati Vurgusu -->
-  <circle cx="64" cy="98" r="2.5" fill="#FF9F43"/>
-  <circle cx="59" cy="94" r="1.5" fill="#FF9F43"/>
-  <circle cx="64" cy="92" r="1.5" fill="#FF9F43"/>
-  <circle cx="69" cy="94" r="1.5" fill="#FF9F43"/>
+  <!-- Pati Vurgusu -->
+  <circle cx="64" cy="98" r="2.5" fill="#FFC6A8"/>
+  <circle cx="59" cy="94" r="1.5" fill="#FFC6A8"/>
+  <circle cx="64" cy="92" r="1.5" fill="#FFC6A8"/>
+  <circle cx="69" cy="94" r="1.5" fill="#FFC6A8"/>
 </svg>

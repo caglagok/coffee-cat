@@ -5,19 +5,19 @@
         animation: floatZzz 3s ease-in-out infinite;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-weight: 700;
-        fill: #8590A6;
+        fill: #FFC6A8;
       }
       .zzz-2 {
         animation: floatZzz 3s ease-in-out 1s infinite;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-weight: 700;
-        fill: #8590A6;
+        fill: #FFC6A8;
       }
       .zzz-3 {
         animation: floatZzz 3s ease-in-out 2s infinite;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-weight: 700;
-        fill: #8590A6;
+        fill: #FFC6A8;
       }
       .head-nod {
         transform-origin: 160px 210px;
@@ -36,7 +36,7 @@
     </style>
   </defs>
 
-  <circle cx="160" cy="160" r="145" stroke="var(--vscode-widget-border, #3A3A5A)" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
+  <circle cx="160" cy="160" r="145" stroke="#741A2F" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.35"/>
 
   <!-- Zzz -->
   <g>
@@ -46,37 +46,37 @@
   </g>
 
   <!-- Gövde -->
-  <path d="M90,260 C90,205 130,200 160,200 C190,200 230,205 230,260" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M90,260 C90,205 130,200 160,200 C190,200 230,205 230,260" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Kafa ve Kulaklar -->
   <g class="head-nod">
     <!-- Sol Kulak (Düşük) -->
-    <path d="M92,135 L82,82 L132,112" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M98,124 L90,95 L122,112" stroke="#E8A598" stroke-width="2" stroke-linecap="round"/>
+    <path d="M92,135 L82,82 L132,112" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M98,124 L90,95 L122,112" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round"/>
 
     <!-- Sağ Kulak (Düşük) -->
-    <path d="M228,135 L238,82 L188,112" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M222,124 L230,95 L198,112" stroke="#E8A598" stroke-width="2" stroke-linecap="round"/>
+    <path d="M228,135 L238,82 L188,112" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M222,124 L230,95 L198,112" stroke="#FFC6A8" stroke-width="2.5" stroke-linecap="round"/>
 
     <!-- Kafa -->
-    <path d="M132,112 C140,110 150,108 160,108 C170,108 180,110 188,112 C222,122 232,160 220,192 C208,220 112,220 100,192 C88,160 98,122 132,112 Z" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
+    <path d="M132,112 C140,110 150,108 160,108 C170,108 180,110 188,112 C222,122 232,160 220,192 C208,220 112,220 100,192 C88,160 98,122 132,112 Z" stroke="#741A2F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="#241A1F"/>
 
     <!-- Uykulu / Kapanan Gözler -->
-    <path d="M122,150 C130,158 142,158 150,150" stroke="#C27D38" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M170,150 C178,158 190,158 198,150" stroke="#C27D38" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M122,150 C130,158 142,158 150,150" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M170,150 C178,158 190,158 198,150" stroke="#FFC6A8" stroke-width="3.5" stroke-linecap="round"/>
 
     <!-- Esneyen Ağız -->
-    <path d="M157,160 L163,160 L160,164 Z" fill="#D48181"/>
-    <ellipse cx="160" cy="173" rx="6" ry="8" stroke="#E5A663" stroke-width="2.5"/>
+    <path d="M157,160 L163,160 L160,164 Z" fill="#FFC6A8"/>
+    <ellipse cx="160" cy="173" rx="6" ry="8" stroke="#FFC6A8" stroke-width="2.5"/>
 
-    <!-- Bıyıklar (Sarkık) -->
-    <line x1="88" y1="158" x2="114" y2="164" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-    <line x1="86" y1="170" x2="112" y2="173" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-    <line x1="232" y1="158" x2="206" y2="164" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-    <line x1="234" y1="170" x2="208" y2="173" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <!-- Bıyıklar -->
+    <line x1="88" y1="158" x2="114" y2="164" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+    <line x1="86" y1="170" x2="112" y2="173" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+    <line x1="232" y1="158" x2="206" y2="164" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+    <line x1="234" y1="170" x2="208" y2="173" stroke="#FFC6A8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
   </g>
 
-  <!-- Masaya / Öne Uzatılmış Patiler -->
-  <path d="M110,245 C125,240 140,240 145,250" stroke="#E5A663" stroke-width="3" stroke-linecap="round"/>
-  <path d="M210,245 C195,240 180,240 175,250" stroke="#E5A663" stroke-width="3" stroke-linecap="round"/>
+  <!-- Patiler -->
+  <path d="M110,245 C125,240 140,240 145,250" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M210,245 C195,240 180,240 175,250" stroke="#FFC6A8" stroke-width="3" stroke-linecap="round"/>
 </svg>

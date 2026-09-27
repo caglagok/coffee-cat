@@ -24,9 +24,9 @@ export function activate(context: vscode.ExtensionContext) {
   const cmdMolaBaslat = vscode.commands.registerCommand('kahveKedisi.molaBaslat', async () => {
     const secim = await vscode.window.showQuickPick(
       [
-        { label: '☕ 5 Dakika Kahve Molası', sure: 5 },
-        { label: '☕ 10 Dakika Dinlenme', sure: 10 },
-        { label: '☕ 15 Dakika Uzun Mola & Yürüyüş', sure: 15 }
+        { label: '$(coffee) 5 Dakika Kahve Molası', sure: 5 },
+        { label: '$(clock) 10 Dakika Dinlenme', sure: 10 },
+        { label: '$(sparkle) 15 Dakika Uzun Mola & Yürüyüş', sure: 15 }
       ],
       { placeHolder: 'Kaç dakika mola vermek istersin?' }
     );

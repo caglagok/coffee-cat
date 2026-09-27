@@ -178,16 +178,16 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
       const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, this.ertelemeSayisi, isim);
       const secim = await vscode.window.showInformationMessage(
         mesaj,
-        '☕ 5 Dk Mola Ver',
-        '⏳ 5 Dk Ertele',
-        '📊 Mola Karnesi'
+        '5 Dk Mola Ver',
+        '5 Dk Ertele',
+        'Mola Karnesi'
       );
 
-      if (secim === '☕ 5 Dk Mola Ver') {
+      if (secim === '5 Dk Mola Ver') {
         this.molaBaslat(5);
-      } else if (secim === '⏳ 5 Dk Ertele') {
+      } else if (secim === '5 Dk Ertele') {
         this.ertele(5);
-      } else if (secim === '📊 Mola Karnesi') {
+      } else if (secim === 'Mola Karnesi') {
         this.paneliGoster(mod);
       }
     }
@@ -205,7 +205,7 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
     this.ertelemeSayisi++;
     this.istatistik.molaErtelendi();
     this.calismaSaniyesi = Math.max(0, (this.molaSuresiDakika - ekDakika) * 60);
-    vscode.window.showInformationMessage(`⏳ Mola ${ekDakika} dakika ertelendi. Kedi gözlerini üstünden ayırmıyor! 👀🐾`);
+    vscode.window.showInformationMessage(`Mola ${ekDakika} dakika ertelendi. Kedi seni izlemeye devam ediyor.`);
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {
       this.paneliGoster(this.guncelMod());

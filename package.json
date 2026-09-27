@@ -4,7 +4,7 @@
   "description": "Sevimli, mola hatirlatan ve calisma aliskanliklarini takip eden animasyonlu VS Code kedisi",
   "version": "1.0.0",
   "publisher": "kahve-kedisi",
-  "icon": "media/icon.svg",
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -50,17 +50,17 @@
         "command": "kahveKedisi.sayaciSifirla",
         "title": "Çalışma Sayacını Sıfırla",
         "category": "Kahve Kedisi",
-        "icon": "$(refresh)"
+        "icon": "$(sync)"
       },
       {
         "command": "kahveKedisi.simdilikKapat",
-        "title": "Bugünlük Kediyi Uyut / Duraklat",
+        "title": "Kediyi Uyut / Duraklat",
         "category": "Kahve Kedisi",
         "icon": "$(debug-pause)"
       },
       {
         "command": "kahveKedisi.kediyiSev",
-        "title": "Kediyi Sev 🐾",
+        "title": "Kediyi Sev",
         "category": "Kahve Kedisi",
         "icon": "$(sparkle)"
       }

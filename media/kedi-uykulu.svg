@@ -1,35 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%" fill="none">
   <defs>
-    <linearGradient id="furGradUykulu" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E5A663"/>
-      <stop offset="100%" stop-color="#C27D38"/>
-    </linearGradient>
-    <linearGradient id="cupGradSleepy" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#5C4D43"/>
-      <stop offset="100%" stop-color="#3A3029"/>
-    </linearGradient>
     <style>
       .zzz-1 {
         animation: floatZzz 3s ease-in-out infinite;
-        font-family: 'Arial Rounded MT Bold', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-weight: 900;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 700;
         fill: #8590A6;
       }
       .zzz-2 {
         animation: floatZzz 3s ease-in-out 1s infinite;
-        font-family: 'Arial Rounded MT Bold', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-weight: 900;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 700;
         fill: #8590A6;
       }
       .zzz-3 {
         animation: floatZzz 3s ease-in-out 2s infinite;
-        font-family: 'Arial Rounded MT Bold', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-weight: 900;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 700;
         fill: #8590A6;
-      }
-      .tail-sleepy {
-        transform-origin: 230px 245px;
-        animation: slowTail 4s ease-in-out infinite alternate;
       }
       .head-nod {
         transform-origin: 160px 210px;
@@ -37,90 +25,58 @@
       }
       @keyframes floatZzz {
         0% { opacity: 0; transform: translate(0px, 0px) scale(0.6); }
-        40% { opacity: 0.9; transform: translate(12px, -18px) scale(1); }
-        80% { opacity: 0.7; transform: translate(25px, -36px) scale(1.3); }
-        100% { opacity: 0; transform: translate(32px, -48px) scale(1.5); }
-      }
-      @keyframes slowTail {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(8deg); }
+        40% { opacity: 0.9; transform: translate(10px, -15px) scale(1); }
+        80% { opacity: 0.7; transform: translate(22px, -32px) scale(1.3); }
+        100% { opacity: 0; transform: translate(30px, -45px) scale(1.5); }
       }
       @keyframes sleepyNod {
         0%, 100% { transform: rotate(0deg) translateY(0px); }
-        50% { transform: rotate(3deg) translateY(6px); }
+        50% { transform: rotate(2.5deg) translateY(5px); }
       }
     </style>
   </defs>
 
-  <!-- Loş Gece/Yorgunluk Arka Plan Çemberi -->
-  <circle cx="160" cy="160" r="140" fill="#EAEFF5" opacity="0.4"/>
+  <circle cx="160" cy="160" r="145" stroke="var(--vscode-widget-border, #3A3A5A)" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
 
-  <!-- Zzz Baloncukları -->
+  <!-- Zzz -->
   <g>
-    <text x="210" y="95" font-size="18" class="zzz-1">z</text>
-    <text x="235" y="75" font-size="24" class="zzz-2">Z</text>
-    <text x="265" y="50" font-size="30" class="zzz-3">Z</text>
+    <text x="215" y="90" font-size="16" class="zzz-1">z</text>
+    <text x="238" y="70" font-size="22" class="zzz-2">Z</text>
+    <text x="268" y="45" font-size="28" class="zzz-3">Z</text>
   </g>
-
-  <!-- Kuyruk (Yere serilmiş, yavaş kımıldayan) -->
-  <path class="tail-sleepy" d="M220,240 Q265,245 275,225 Q280,210 268,215 Q250,225 220,230 Z" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="4" stroke-linecap="round"/>
 
   <!-- Gövde -->
-  <ellipse cx="160" cy="228" rx="80" ry="62" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="4"/>
-  <!-- Göbek -->
-  <ellipse cx="160" cy="235" rx="50" ry="38" fill="#F4E8D8"/>
+  <path d="M90,260 C90,205 130,200 160,200 C190,200 230,205 230,260" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Kafa ve Kulaklar (Birlikte sallanıyor) -->
+  <!-- Kafa ve Kulaklar -->
   <g class="head-nod">
     <!-- Sol Kulak (Düşük) -->
-    <polygon points="85,130 92,80 132,118" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="4" stroke-linejoin="round"/>
-    <polygon points="94,124 100,90 125,115" fill="#E8A598"/>
+    <path d="M92,135 L82,82 L132,112" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M98,124 L90,95 L122,112" stroke="#E8A598" stroke-width="2" stroke-linecap="round"/>
 
     <!-- Sağ Kulak (Düşük) -->
-    <polygon points="235,130 228,80 188,118" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="4" stroke-linejoin="round"/>
-    <polygon points="226,124 220,90 195,115" fill="#E8A598"/>
+    <path d="M228,135 L238,82 L188,112" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M222,124 L230,95 L198,112" stroke="#E8A598" stroke-width="2" stroke-linecap="round"/>
 
     <!-- Kafa -->
-    <circle cx="160" cy="150" r="62" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="4"/>
+    <path d="M132,112 C140,110 150,108 160,108 C170,108 180,110 188,112 C222,122 232,160 220,192 C208,220 112,220 100,192 C88,160 98,122 132,112 Z" stroke="#E5A663" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="var(--vscode-editor-background, #1E1E2E)"/>
 
-    <!-- Alın Çizgileri -->
-    <path d="M160,98 L160,112 M150,101 L153,112 M170,101 L167,112" stroke="#9E5D1E" stroke-width="3" stroke-linecap="round"/>
+    <!-- Uykulu / Kapanan Gözler -->
+    <path d="M122,150 C130,158 142,158 150,150" stroke="#C27D38" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M170,150 C178,158 190,158 198,150" stroke="#C27D38" stroke-width="3.5" stroke-linecap="round"/>
 
-    <!-- Yorgun/Kapanan Gözler -->
-    <g>
-      <!-- Sol Göz Çizgisi -->
-      <path d="M124,148 Q136,155 148,148" fill="none" stroke="#2B1810" stroke-width="4.5" stroke-linecap="round"/>
-      <!-- Göz Altı Morluk/Yorgunluk Torbası -->
-      <path d="M123,156 Q136,163 149,156" fill="none" stroke="#B08D79" stroke-width="2" stroke-linecap="round"/>
+    <!-- Esneyen Ağız -->
+    <path d="M157,160 L163,160 L160,164 Z" fill="#D48181"/>
+    <ellipse cx="160" cy="173" rx="6" ry="8" stroke="#E5A663" stroke-width="2.5"/>
 
-      <!-- Sağ Göz Çizgisi -->
-      <path d="M172,148 Q184,155 196,148" fill="none" stroke="#2B1810" stroke-width="4.5" stroke-linecap="round"/>
-      <!-- Göz Altı Morluk/Yorgunluk Torbası -->
-      <path d="M171,156 Q184,163 197,156" fill="none" stroke="#B08D79" stroke-width="2" stroke-linecap="round"/>
-    </g>
-
-    <!-- Burun & Esneyen / Uykulu Ağız -->
-    <polygon points="156,158 164,158 160,163" fill="#D48181"/>
-    <!-- Küçük esneme / uyku ağzı -->
-    <ellipse cx="160" cy="172" rx="7" ry="9" fill="#782D2D"/>
-    <path d="M156,177 Q160,174 164,177" fill="#FFAAA6"/>
-
-    <!-- Bıyıklar (Aşağı sarkık) -->
-    <line x1="88" y1="156" x2="118" y2="162" stroke="#4A3B32" stroke-width="2" stroke-linecap="round"/>
-    <line x1="86" y1="168" x2="116" y2="171" stroke="#4A3B32" stroke-width="2" stroke-linecap="round"/>
-    <line x1="232" y1="156" x2="202" y2="162" stroke="#4A3B32" stroke-width="2" stroke-linecap="round"/>
-    <line x1="234" y1="168" x2="204" y2="171" stroke="#4A3B32" stroke-width="2" stroke-linecap="round"/>
+    <!-- Bıyıklar (Sarkık) -->
+    <line x1="88" y1="158" x2="114" y2="164" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="86" y1="170" x2="112" y2="173" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="232" y1="158" x2="206" y2="164" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="234" y1="170" x2="208" y2="173" stroke="#E5A663" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
   </g>
 
-  <!-- Yorgun Devrilmiş/Boş Kupa -->
-  <g transform="translate(130, 222)">
-    <path d="M12,12 L50,12 C50,42 42,48 30,48 C18,48 12,42 12,12 Z" fill="url(#cupGradSleepy)" stroke="#8C7665" stroke-width="2"/>
-    <ellipse cx="30" cy="12" rx="19" ry="4" fill="#3D3028"/>
-    <!-- Boş kupa dibinde son damla -->
-    <circle cx="30" cy="12" r="4" fill="#241B15"/>
-  </g>
-
-  <!-- Patiler masaya / gövdeye yayılmış -->
-  <ellipse cx="120" cy="245" rx="18" ry="10" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="3"/>
-  <ellipse cx="200" cy="245" rx="18" ry="10" fill="url(#furGradUykulu)" stroke="#9E5D1E" stroke-width="3"/>
+  <!-- Masaya / Öne Uzatılmış Patiler -->
+  <path d="M110,245 C125,240 140,240 145,250" stroke="#E5A663" stroke-width="3" stroke-linecap="round"/>
+  <path d="M210,245 C195,240 180,240 175,250" stroke="#E5A663" stroke-width="3" stroke-linecap="round"/>
 </svg>

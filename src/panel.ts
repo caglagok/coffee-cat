@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { KediModu, MesajYoneticisi } from './mesajlar';
 import { IstatistikYoneticisi } from './istatistik';
+import { I18nManager } from './i18n';
 
 export class PanelYoneticisi {
   public static guncelPanel: PanelYoneticisi | undefined;
@@ -27,9 +28,12 @@ export class PanelYoneticisi {
 
     this.panel.webview.onDidReceiveMessage(
       async (mesaj) => {
+        const i18n = I18nManager.getStrings();
+        const developerName = I18nManager.getDeveloperName();
+
         if (mesaj.komut === 'kediSevildi') {
           const yeniSayi = await this.istatistik.kediSevildi();
-          const sevgiMesaji = MesajYoneticisi.rastgeleSevgiTepkisi();
+          const sevgiMesaji = MesajYoneticisi.rastgeleSevgiTepkisi(developerName);
           this.panel.webview.postMessage({
             tip: 'sevgiGuncelle',
             sayi: yeniSayi,
@@ -42,7 +46,7 @@ export class PanelYoneticisi {
         if (mesaj.komut === 'istatistikSifirla') {
           await this.istatistik.istatistikleriSifirla();
           this.durumGuncelle('mutlu', 0, 45, 0, 0);
-          vscode.window.showInformationMessage('Kahve Kedisi: İstatistikler sıfırlandı.');
+          vscode.window.showInformationMessage(i18n.msgStatsReset);
           this.onKomutCallback('aktivite');
           return;
         }
@@ -65,6 +69,7 @@ export class PanelYoneticisi {
     molaKalanSaniye: number = 0
   ): PanelYoneticisi {
     const sutun = vscode.ViewColumn.Beside;
+    const i18n = I18nManager.getStrings();
 
     if (PanelYoneticisi.guncelPanel) {
       PanelYoneticisi.guncelPanel.panel.reveal(sutun);
@@ -80,7 +85,7 @@ export class PanelYoneticisi {
 
     const panel = vscode.window.createWebviewPanel(
       'kahveKedisiPanel',
-      'Kahve Kedisi',
+      i18n.brandName,
       sutun,
       {
         enableScripts: true,
@@ -113,10 +118,10 @@ export class PanelYoneticisi {
     molaKalanSaniye: number = 0
   ): void {
     const config = vscode.workspace.getConfiguration('kahveKedisi');
-    const isim = config.get<string>('kisiselIsim', 'Geliştirici');
+    const developerName = I18nManager.getDeveloperName();
     const sesAktif = config.get<boolean>('sesEfektiAktif', true);
 
-    const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, ertelemeSayisi, isim);
+    const mesaj = MesajYoneticisi.rastgeleMesajGetir(mod, ertelemeSayisi, developerName);
     const svgContent = this.svgGetir(mod);
     const istatistikVeri = this.istatistik.getVeri();
 
@@ -129,7 +134,8 @@ export class PanelYoneticisi {
       ertelemeSayisi,
       molaKalanSaniye,
       istatistikVeri,
-      sesAktif
+      sesAktif,
+      developerName
     );
   }
 
@@ -138,6 +144,7 @@ export class PanelYoneticisi {
     hedefDakika: number,
     ertelemeSayisi: number
   ): void {
+    const i18n = I18nManager.getStrings();
     const calismaDakika = Math.floor(calismaSaniye / 60);
     const calismaKalanSaniye = calismaSaniye % 60;
     const hedefSaniye = Math.max(60, hedefDakika * 60);
@@ -160,7 +167,10 @@ export class PanelYoneticisi {
       yuzde,
       mutlulukPuani,
       bugunCalismaDakika: bugun.toplamCalismaDakika,
-      enUzunKesintisizDakika: bugun.enUzunKesintisizDakika
+      enUzunKesintisizDakika: bugun.enUzunKesintisizDakika,
+      minutesShort: i18n.minutesShort,
+      secondsShort: i18n.secondsShort,
+      statusText: ertelemeSayisi > 0 ? i18n.postponedTimes(ertelemeSayisi) : i18n.onTrack
     });
   }
 
@@ -201,8 +211,10 @@ export class PanelYoneticisi {
     ertelemeSayisi: number,
     molaKalanSaniye: number,
     istatistik: ReturnType<IstatistikYoneticisi['getVeri']>,
-    sesAktif: boolean
+    sesAktif: boolean,
+    developerName: string
   ): string {
+    const i18n = I18nManager.getStrings();
     const calismaDakika = Math.floor(calismaSaniye / 60);
     const calismaKalanSaniye = calismaSaniye % 60;
     const hedefSaniye = Math.max(60, hedefDakika * 60);
@@ -218,7 +230,6 @@ export class PanelYoneticisi {
     }
     mutlulukPuani = Math.max(10, Math.min(100, mutlulukPuani));
 
-    // Lucide / Heroicon İçi Boş Outline SVG İkonlar
     const iconCoffee = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><line x1="6" y1="2" x2="6" y2="4"></line><line x1="10" y1="2" x2="10" y2="4"></line><line x1="14" y1="2" x2="14" y2="4"></line></svg>`;
     const iconClock = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
     const iconHeart = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>`;
@@ -236,11 +247,11 @@ export class PanelYoneticisi {
     const iconCat = `<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-4 0-7.5 2-7.5 5 0 2 1.5 3.5 3.5 4.5-.5 1.5-.5 3 0 4.5 2 1.5 5 1.5 8 0 .5-1.5.5-3 0-4.5 2-1 3.5-2.5 3.5-4.5 0-3-3.5-5-7.5-5Z"></path><path d="M4.5 10 3 4l6 2"></path><path d="M19.5 10 21 4l-6 2"></path></svg>`;
 
     return `<!DOCTYPE html>
-<html lang="tr">
+<html lang="${I18nManager.getLanguage()}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kahve Kedisi</title>
+  <title>${i18n.brandName}</title>
   <style>
     :root {
       --bg-primary: var(--vscode-editor-background, #1A1316);
@@ -618,16 +629,16 @@ export class PanelYoneticisi {
     <div class="header-bar">
       <div class="brand-title">
         ${iconCoffee}
-        <span>Kahve Kedisi</span>
+        <span>${i18n.brandName}</span>
       </div>
       <div class="tab-buttons">
         <button class="tab-btn active" id="tabMainBtn" onclick="tabDegistir('ana')">
           ${iconCat}
-          <span>Kedi</span>
+          <span>${i18n.tabCat}</span>
         </button>
         <button class="tab-btn" id="tabStatsBtn" onclick="tabDegistir('istatistik')">
           ${iconChart}
-          <span>Mola Karnesi</span>
+          <span>${i18n.tabStats}</span>
         </button>
       </div>
     </div>
@@ -637,7 +648,7 @@ export class PanelYoneticisi {
       <div class="cat-stage">
         <div class="cat-avatar-container" id="catAvatar" onclick="kediyiSev(event)">
           ${svgContent}
-          <div class="pet-hint">${iconSparkles} <span>Sev</span></div>
+          <div class="pet-hint">${iconSparkles} <span>${i18n.petHint}</span></div>
         </div>
         <div class="speech-bubble" id="speechBubble">
           ${mesaj}
@@ -647,28 +658,28 @@ export class PanelYoneticisi {
       <div class="break-timer-card" id="breakTimerCard">
         <div style="font-size: 0.9rem; color: var(--accent-peach); display: flex; align-items: center; gap: 6px;">
           ${iconCoffee}
-          <span>MOLA DEVAM EDİYOR</span>
+          <span>${i18n.breakOngoing}</span>
         </div>
         <div class="break-countdown" id="breakTimerDisplay">${molaZamaniStr}</div>
-        <div style="font-size: 0.82rem; color: var(--text-muted);">Derin nefes al, kahveni yudumla ve omuzlarını gevşet.</div>
+        <div style="font-size: 0.82rem; color: var(--text-muted);">${i18n.breakSubtitle}</div>
       </div>
 
       <div class="status-meter-box" id="workMeterBox" style="display: ${mod === 'mola' ? 'none' : 'flex'};">
         <div class="meter-header">
           <span style="display: flex; align-items: center; gap: 6px;">
             ${iconClock}
-            <span>Kesintisiz Odaklanma</span>
+            <span>${i18n.focusTitle}</span>
           </span>
           <span id="workTimeHeader">
-            <strong id="workTimeMinutes" style="color: var(--accent-peach);">${calismaDakika} dk ${calismaKalanSaniye > 0 ? calismaKalanSaniye + ' sn' : ''}</strong> / ${hedefDakika} dk
+            <strong id="workTimeMinutes" style="color: var(--accent-peach);">${calismaDakika} ${i18n.minutesShort} ${calismaKalanSaniye > 0 ? calismaKalanSaniye + ' ' + i18n.secondsShort : ''}</strong> / ${hedefDakika} ${i18n.minutesShort}
           </span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="progressBarFill" style="width: ${yuzde}%;"></div>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
-          <span>Kedi Mutluluğu: %<span id="catHappiness">${mutlulukPuani}</span></span>
-          <span id="workStatusText">${ertelemeSayisi > 0 ? `${ertelemeSayisi} kez ertelendi` : 'Hedefe uygun'}</span>
+          <span>${i18n.catHappiness}: %<span id="catHappiness">${mutlulukPuani}</span></span>
+          <span id="workStatusText">${ertelemeSayisi > 0 ? i18n.postponedTimes(ertelemeSayisi) : i18n.onTrack}</span>
         </div>
       </div>
 
@@ -677,19 +688,19 @@ export class PanelYoneticisi {
           mod === 'mola'
             ? `<button class="btn btn-finish-break" onclick="komutGonder('calismayaDon')">
                  ${iconCheck}
-                 <span>Molayı Bitir & Kodlamaya Dön</span>
+                 <span>${i18n.btnFinishBreak}</span>
                </button>`
             : `<button class="btn btn-break-primary" onclick="molaSecimiGoster()">
                  ${iconCoffee}
-                 <span>Şimdi Kahve Molası Ver</span>
+                 <span>${i18n.btnTakeBreak}</span>
                </button>
                <button class="btn btn-snooze" onclick="komutGonder('ertele')">
                  ${iconClock}
-                 <span>5 Dk Daha (Ertele)</span>
+                 <span>${i18n.btnSnooze}</span>
                </button>
                <button class="btn btn-snooze" onclick="komutGonder('sayaciSifirla')">
                  ${iconRotate}
-                 <span>Sayacı Sıfırla</span>
+                 <span>${i18n.btnReset}</span>
                </button>`
         }
       </div>
@@ -697,19 +708,19 @@ export class PanelYoneticisi {
       <div class="stats-row">
         <div class="stat-badge">
           <span class="stat-value" id="badgeBreaks">${istatistik.bugun.alinanMolaSayisi}</span>
-          <span class="stat-label">${iconCoffee} Mola</span>
+          <span class="stat-label">${iconCoffee} ${i18n.statTodayBreak}</span>
         </div>
         <div class="stat-badge">
           <span class="stat-value" id="badgeWorkMin">${istatistik.bugun.toplamCalismaDakika}m</span>
-          <span class="stat-label">${iconClock} Çalışma</span>
+          <span class="stat-label">${iconClock} ${i18n.statWorkTime}</span>
         </div>
         <div class="stat-badge">
           <span class="stat-value" id="badgeMaxSession">${istatistik.bugun.enUzunKesintisizDakika}m</span>
-          <span class="stat-label">${iconFlame} En Uzun</span>
+          <span class="stat-label">${iconFlame} ${i18n.statLongestSession}</span>
         </div>
         <div class="stat-badge">
           <span class="stat-value" id="badgePets">${istatistik.bugun.sevilmeSayisi}</span>
-          <span class="stat-label">${iconHeart} Sevgi</span>
+          <span class="stat-label">${iconHeart} ${i18n.statLove}</span>
         </div>
       </div>
     </div>
@@ -719,24 +730,24 @@ export class PanelYoneticisi {
       <div class="stats-card">
         <h3 style="color: var(--accent-peach); font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
           ${iconTrophy}
-          <span>Genel Başarı Tablosu</span>
+          <span>${i18n.overallStatsTitle}</span>
         </h3>
         <div class="stats-row">
           <div class="stat-badge">
             <span class="stat-value">${istatistik.toplamOmurBoyuMola}</span>
-            <span class="stat-label">${iconCoffee} Toplam Mola</span>
+            <span class="stat-label">${iconCoffee} ${i18n.statTotalBreak}</span>
           </div>
           <div class="stat-badge">
-            <span class="stat-value">${Math.round(istatistik.toplamOmurBoyuCalismaDakika / 60)}s</span>
-            <span class="stat-label">${iconClock} Toplam Saat</span>
+            <span class="stat-value">${Math.round(istatistik.toplamOmurBoyuCalismaDakika / 60)}h</span>
+            <span class="stat-label">${iconClock} ${i18n.statTotalHours}</span>
           </div>
           <div class="stat-badge">
             <span class="stat-value">${istatistik.rekorKesintisizDakika}m</span>
-            <span class="stat-label">${iconFlame} Rekor Seans</span>
+            <span class="stat-label">${iconFlame} ${i18n.statRecordSession}</span>
           </div>
           <div class="stat-badge">
             <span class="stat-value">${istatistik.bugun.ertelenenMolaSayisi}</span>
-            <span class="stat-label">${iconRotate} Erteleme</span>
+            <span class="stat-label">${iconRotate} ${i18n.statPostponeCount}</span>
           </div>
         </div>
       </div>
@@ -744,21 +755,21 @@ export class PanelYoneticisi {
       <div class="stats-card">
         <h3 style="font-size: 0.95rem; color: var(--accent-peach); display: flex; align-items: center; gap: 8px;">
           ${iconCalendar}
-          <span>Son Günlerin Mola Karnesi</span>
+          <span>${i18n.historyTableTitle}</span>
         </h3>
         ${
           istatistik.gecmis.length === 0
             ? `<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 14px;">
-                 Henüz geçmiş gün kaydı bulunmuyor. Düzenli mola verdikçe burası dolacak.
+                 ${i18n.noHistoryText}
                </div>`
             : `<table class="stats-table">
                  <thead>
                    <tr>
-                     <th>Tarih</th>
-                     <th>Mola</th>
-                     <th>Çalışma</th>
-                     <th>En Uzun</th>
-                     <th>Erteleme</th>
+                     <th>${i18n.tableDate}</th>
+                     <th>${i18n.tableBreak}</th>
+                     <th>${i18n.tableWork}</th>
+                     <th>${i18n.tableLongest}</th>
+                     <th>${i18n.tablePostpone}</th>
                    </tr>
                  </thead>
                  <tbody>
@@ -768,8 +779,8 @@ export class PanelYoneticisi {
                      <tr>
                        <td><strong>${g.tarih}</strong></td>
                        <td>${g.alinanMolaSayisi}</td>
-                       <td>${g.toplamCalismaDakika} dk</td>
-                       <td>${g.enUzunKesintisizDakika} dk</td>
+                       <td>${g.toplamCalismaDakika} ${i18n.minutesShort}</td>
+                       <td>${g.enUzunKesintisizDakika} ${i18n.minutesShort}</td>
                        <td>${g.ertelenenMolaSayisi}</td>
                      </tr>
                    `
@@ -783,7 +794,7 @@ export class PanelYoneticisi {
       <div style="display: flex; gap: 10px; width: 100%;">
         <button class="btn btn-snooze" style="flex: 1;" onclick="komutGonder('istatistikSifirla')">
           ${iconTrash}
-          <span>İstatistikleri Sıfırla</span>
+          <span>${i18n.btnResetStats}</span>
         </button>
       </div>
     </div>
@@ -792,12 +803,12 @@ export class PanelYoneticisi {
     <div class="footer-bar">
       <div class="sound-toggle" onclick="sesAcKapa()">
         <span id="soundIcon" style="display: flex; align-items: center; gap: 6px;">
-          ${sesAktif ? iconVolume2 + '<span>Ses Açık</span>' : iconVolumeX + '<span>Ses Kapalı</span>'}
+          ${sesAktif ? iconVolume2 + `<span>${i18n.soundOn}</span>` : iconVolumeX + `<span>${i18n.soundOff}</span>`}
         </span>
       </div>
       <div style="cursor: pointer; display: flex; align-items: center; gap: 6px;" onclick="komutGonder('simdilikKapat')">
         ${iconMoon}
-        <span>Kediyi Uyut / Duraklat</span>
+        <span>${i18n.sleepToggle}</span>
       </div>
     </div>
   </div>
@@ -806,8 +817,8 @@ export class PanelYoneticisi {
     const vscode = acquireVsCodeApi();
     let sesDurumu = ${sesAktif};
 
-    const iconVolOn = \`${iconVolume2}<span>Ses Açık</span>\`;
-    const iconVolOff = \`${iconVolumeX}<span>Ses Kapalı</span>\`;
+    const iconVolOn = \`${iconVolume2}<span>${i18n.soundOn}</span>\`;
+    const iconVolOff = \`${iconVolumeX}<span>${i18n.soundOff}</span>\`;
 
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
@@ -919,7 +930,6 @@ export class PanelYoneticisi {
         const speechBubble = document.getElementById('speechBubble');
         if (speechBubble) speechBubble.innerText = msg.mesaj;
       } else if (msg.tip === 'calismaSayaciGuncelle') {
-        // Canlı ilerleme çubuğu ve süre güncellemesi
         const fillEl = document.getElementById('progressBarFill');
         if (fillEl) {
           fillEl.style.width = msg.yuzde + '%';
@@ -927,8 +937,13 @@ export class PanelYoneticisi {
 
         const workTimeEl = document.getElementById('workTimeMinutes');
         if (workTimeEl) {
-          const snMetin = msg.calismaKalanSaniye > 0 ? ' ' + msg.calismaKalanSaniye + ' sn' : '';
-          workTimeEl.innerText = msg.calismaDakika + ' dk' + snMetin;
+          const snMetin = msg.calismaKalanSaniye > 0 ? ' ' + msg.calismaKalanSaniye + ' ' + msg.secondsShort : '';
+          workTimeEl.innerText = msg.calismaDakika + ' ' + msg.minutesShort + snMetin;
+        }
+
+        const workStatusText = document.getElementById('workStatusText');
+        if (workStatusText && msg.statusText) {
+          workStatusText.innerText = msg.statusText;
         }
 
         const catHappinessEl = document.getElementById('catHappiness');
@@ -938,12 +953,12 @@ export class PanelYoneticisi {
 
         const badgeWorkMin = document.getElementById('badgeWorkMin');
         if (badgeWorkMin) {
-          badgeWorkMin.innerText = msg.bugunCalismaDakika + 'm';
+          badgeWorkMin.innerText = msg.bugunCalismaDakika + (msg.minutesShort || 'm');
         }
 
         const badgeMaxSession = document.getElementById('badgeMaxSession');
         if (badgeMaxSession) {
-          badgeMaxSession.innerText = msg.enUzunKesintisizDakika + 'm';
+          badgeMaxSession.innerText = msg.enUzunKesintisizDakika + (msg.minutesShort || 'm');
         }
       } else if (msg.tip === 'molaSayaciGuncelle') {
         const dk = Math.floor(msg.kalanSaniye / 60);

@@ -3,6 +3,7 @@ import { DurumCubuguYoneticisi } from './durumCubugu';
 import { IstatistikYoneticisi } from './istatistik';
 import { MesajYoneticisi } from './mesajlar';
 import { ZamanlayiciYoneticisi } from './zamanlayici';
+import { I18nManager } from './i18n';
 
 let zamanlayici: ZamanlayiciYoneticisi | undefined;
 
@@ -20,13 +21,14 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   const cmdMolaBaslat = vscode.commands.registerCommand('kahveKedisi.molaBaslat', async () => {
+    const i18n = I18nManager.getStrings();
     const secim = await vscode.window.showQuickPick(
       [
-        { label: '$(coffee) 5 Dakika Kahve Molası', sure: 5 },
-        { label: '$(clock) 10 Dakika Dinlenme', sure: 10 },
-        { label: '$(sparkle) 15 Dakika Uzun Mola ve Yürüyüş', sure: 15 }
+        { label: `$(coffee) ${i18n.qpBreak5}`, sure: 5 },
+        { label: `$(clock) ${i18n.qpBreak10}`, sure: 10 },
+        { label: `$(sparkle) ${i18n.qpBreak15}`, sure: 15 }
       ],
-      { placeHolder: 'Kaç dakika mola vermek istersin?' }
+      { placeHolder: i18n.qpPlaceholder }
     );
 
     if (secim) {
@@ -44,8 +46,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   const cmdKediyiSev = vscode.commands.registerCommand('kahveKedisi.kediyiSev', async () => {
     const toplamSevgi = await istatistik.kediSevildi();
-    const tepki = MesajYoneticisi.rastgeleSevgiTepkisi();
-    vscode.window.showInformationMessage(`${tepki} (Toplam sevgi: ${toplamSevgi})`);
+    const developerName = I18nManager.getDeveloperName();
+    const tepki = MesajYoneticisi.rastgeleSevgiTepkisi(developerName);
+    vscode.window.showInformationMessage(`${tepki} (${I18nManager.getStrings().statLove}: ${toplamSevgi})`);
   });
 
   const configWatcher = vscode.workspace.onDidChangeConfiguration((e) => {

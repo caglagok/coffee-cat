@@ -109,8 +109,29 @@
         },
         "kahveKedisi.kisiselIsim": {
           "type": "string",
-          "default": "Geliştirici",
-          "description": "Kedinin sana nasıl hitap etmesini istersin?"
+          "default": "",
+          "description": "Kedinin sana nasıl hitap etmesini istersin? (Boş bırakılırsa sistem kullanıcı adını otomatik kullanır)"
+        },
+        "kahveKedisi.dil": {
+          "type": "string",
+          "enum": [
+            "otomatik",
+            "tr",
+            "en",
+            "es",
+            "de",
+            "ja"
+          ],
+          "enumDescriptions": [
+            "VS Code dilini otomatik kullan (Automatic)",
+            "Türkçe",
+            "English",
+            "Español",
+            "Deutsch",
+            "日本語"
+          ],
+          "default": "otomatik",
+          "description": "Eklenti arayüz ve mesaj dili / Interface and dialogue language"
         }
       }
     }

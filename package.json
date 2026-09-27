@@ -4,6 +4,7 @@
   "description": "Sevimli, mola hatirlatan ve calisma aliskanliklarini takip eden animasyonlu VS Code kedisi",
   "version": "1.0.0",
   "publisher": "kahve-kedisi",
+  "icon": "media/icon.svg",
   "engines": {
     "vscode": "^1.85.0"
   },

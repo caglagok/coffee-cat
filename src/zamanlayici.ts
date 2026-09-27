@@ -104,7 +104,7 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
         this.calismaSaniyesi = 0;
         this.kesintisizSaniye = 0;
         this.ertelemeSayisi = 0;
-        vscode.window.showInformationMessage('☕ Molanız tamamlandı! Harika bir enerjiyle kodlamaya hazır mısınız? 🐾');
+        vscode.window.showInformationMessage('Molanız tamamlandı! Harika bir enerjiyle kodlamaya hazır mısınız?');
         this.durumGuncelle();
         if (PanelYoneticisi.guncelPanel) {
           this.paneliGoster('mutlu');
@@ -218,7 +218,7 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
     this.ertelemeSayisi = 0;
     this.isBreakActive = false;
     this.molaKalanSaniye = 0;
-    vscode.window.showInformationMessage('🔄 Kahve Kedisi: Çalışma sayacı sıfırlandı!');
+    vscode.window.showInformationMessage('Kahve Kedisi: Çalışma sayacı sıfırlandı.');
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {
       this.paneliGoster('mutlu');
@@ -228,9 +228,9 @@ export class ZamanlayiciYoneticisi implements vscode.Disposable {
   public duraklatVeyaDevamEt(): void {
     this.isPaused = !this.isPaused;
     if (this.isPaused) {
-      vscode.window.showInformationMessage('💤 Kahve Kedisi duraklatıldı. Kedi mışıl mışıl uyuyor...');
+      vscode.window.showInformationMessage('Kahve Kedisi duraklatıldı. Kedi dinleniyor.');
     } else {
-      vscode.window.showInformationMessage('🐾 Kahve Kedisi uyandı ve seni takip ediyor!');
+      vscode.window.showInformationMessage('Kahve Kedisi devam ediyor.');
     }
     this.durumGuncelle();
     if (PanelYoneticisi.guncelPanel) {

@@ -156,7 +156,7 @@ export class PanelYoneticisi {
     } catch (e) {
       console.error('SVG dosyası okunamadı:', e);
     }
-    return `<div style="font-size: 80px; text-align: center;">☕</div>`;
+    return `<div style="text-align: center; padding: 20px;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path></svg></div>`;
   }
 
   private htmlOlustur(

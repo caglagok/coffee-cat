@@ -6,15 +6,18 @@
       "type": "extensionHost",
       "request": "launch",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}"
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--disable-extensions"
       ],
       "outFiles": [
         "${workspaceFolder}/out/**/*.js"
       ],
-      "preLaunchTask": "npm: compile"
+      "preLaunchTask": "npm: compile",
+      "stopOnEntry": false,
+      "sourceMaps": true
     },
     {
-      "name": "Run Extension (Watch Mode)",
+      "name": "Run Extension (Tüm Eklentilerle)",
       "type": "extensionHost",
       "request": "launch",
       "args": [
@@ -23,7 +26,9 @@
       "outFiles": [
         "${workspaceFolder}/out/**/*.js"
       ],
-      "preLaunchTask": "npm: watch"
+      "preLaunchTask": "npm: compile",
+      "stopOnEntry": false,
+      "sourceMaps": true
     }
   ]
 }

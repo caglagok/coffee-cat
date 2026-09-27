@@ -6,7 +6,6 @@ export class DurumCubuguYoneticisi implements vscode.Disposable {
 
   constructor() {
     this.statusBarItem = vscode.window.createStatusBarItem(
-      'kahveKedisi.durum',
       vscode.StatusBarAlignment.Right,
       100
     );
